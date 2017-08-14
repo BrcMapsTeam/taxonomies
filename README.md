@@ -1,6 +1,6 @@
 Source and info: https://github.com/facebookincubator/create-react-app
 
-https://travis-ci.org/BrcMapsTeam/taxonomies.svg?branch=master
+[![Build Status](https://travis-ci.org/BrcMapsTeam/taxonomies.svg?branch=master)](https://travis-ci.org/BrcMapsTeam/taxonomies)
 
 ## Available Scripts
 
