@@ -27,6 +27,10 @@ Your app is ready to be deployed!
 
 See the section about [deployment](#deployment) for more information.
 
+### `serve build/`
+
+Serves the pages in the build folder.
+
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
