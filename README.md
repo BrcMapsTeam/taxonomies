@@ -1,5 +1,7 @@
 Source and info: https://github.com/facebookincubator/create-react-app
 
+https://travis-ci.org/BrcMapsTeam/taxonomies.svg?branch=master
+
 ## Available Scripts
 
 In the project directory, you can run:
