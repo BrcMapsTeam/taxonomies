@@ -1,44 +1,56 @@
-body{
-  overflow:hidden;
+﻿/*-----------colours----------*/
+/*-----------mixins----------*/
+.button {
+  border-radius: 4px;
+  padding: 2em 5em 2em 5em;
+  box-shadow: 0px 3px 5px 0px #b0b8bd;
+  margin: 1em;
 }
-
-a{
-  text-decoration: none;
-
-}
-
-.App {
+/*----------- ----------*/
+body {
+  overflow: hidden;
+  box-sizing: border-box;
   text-align: center;
 }
-
-.Page{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content:center;
-    flex-wrap: wrap;
+a {
+  text-decoration: none;
 }
-
-.NavButton{
-    color: white;
-    background-color: black;
-    border-radius: 3px;
-    padding: 0.7em;
-    margin: 1em;
-    width: 5em;
-    height: 1em;
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-
-.PageContent{
-    width: 100%;
-    padding-top: 2em;
+/*--------------------NAVIGATION BUTTONS---------*/
+.NavButton {
+  color: #ffffff;
+  background-color: #02b196;
+  border-radius: 4px;
+  padding: 2em 5em 2em 5em;
+  box-shadow: 0px 3px 5px 0px #b0b8bd;
+  margin: 1em;
 }
-
-@keyframes slide{
-    from {
-        transform: translateX(0);
-    }
-    to{
-        transform: translateX(100%);
-    }
+.NavButton:hover {
+  background-color: #057a64;
+}
+.NavButtonGreyed {
+  color: #f1f1f1;
+  background-color: #bdb6b0;
+  border-radius: 4px;
+  padding: 2em 5em 2em 5em;
+  box-shadow: 0px 3px 5px 0px #b0b8bd;
+  margin: 1em;
+}
+.PageContent {
+  width: 100%;
+  padding-top: 2em;
+}
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }

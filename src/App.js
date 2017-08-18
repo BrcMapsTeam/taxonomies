@@ -43,13 +43,18 @@ class App extends Component {
             case 1: 
                 return (<UploadPage nextStep={() => this.nextStep.bind(this)} />);
             case 2:
-                return (<SelectColumnPage previousStep={() => this.previousStep.bind(this)} />);
+                return (<SelectColumnPage 
+                            previousStep={() => this.previousStep.bind(this)} 
+                            nextStep
+                        />);
+            default: 
+                return (<h1>Error, please check your entries are correct.</h1>);
         }
     }
 
         render() {
             return(
-            <div>
+            <div className="App">
                 <span className="progress-step">Step {this.state.step}</span>
                 <div>{this.showStep()}</div>
             </div>
