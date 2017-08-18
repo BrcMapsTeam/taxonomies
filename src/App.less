@@ -1,0 +1,77 @@
+/*-----------colours----------*/
+
+@red-primary: #ef1829;
+@red-dark: #98192a;
+@green-primary: #02b196;
+@green-secondary: #057a64;
+@grey-shadows: #b0b8bd;
+@grey-dark: #607875;
+@grey-medium: #bdb6b0;
+@grey-light: #f1f1f1;
+@black: #000000;
+@white: #ffffff;
+@blue-pantone: #0c9dbc;
+
+
+/*-----------mixins----------*/
+
+.button{
+    border-radius: 4px;
+    padding: 2em 5em 2em 5em;
+    box-shadow: 0px 3px 5px 0px @grey-shadows;
+    margin: 1em;
+}
+
+/*----------- ----------*/
+
+body{
+  overflow:hidden;
+  box-sizing: border-box;
+      text-align: center;
+}
+
+a{
+  text-decoration: none;
+
+}
+
+.App {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+/*--------------------NAVIGATION BUTTONS---------*/
+
+.NavButton{
+    color: @white;
+    background-color: @green-primary;
+    .button
+}
+
+.NavButton:hover{
+    background-color: @green-secondary;
+}
+
+.NavButtonGreyed{
+    color: @grey-light;
+    background-color: @grey-medium;
+    .button
+}
+
+
+.PageContent{
+    width: 100%;
+    padding-top: 2em;
+}
+
+@keyframes slide{
+    from {
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(100%);
+    }
+}
