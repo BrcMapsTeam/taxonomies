@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
-import '../index.css';
+import '../App.css';
 
 class UploadPage extends Component {
 
     render(){
         return (<div>
                 <h1>Upload Page</h1>
-                <button onClick={ this.props.nextStep() }>Save and Continue</button>
+                <a className="NavButtonGreyed">Back</a>
+                <a className="NavButton" onClick={ this.props.nextStep() }>Next</a>
               </div>);
     }
 }

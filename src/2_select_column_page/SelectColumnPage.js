@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
-import '../index.css';
+import '../App.css';
 
 class SelectColumnPage extends Component {
     goBack(e) {
@@ -10,8 +10,11 @@ class SelectColumnPage extends Component {
 
     render(){
         return <div><h1>Column</h1>
-              <button onClick={         this.props.previousStep()}>Save and Continue</button>
-              </div>;
+            <div className="NavigationContainer">
+              <a className="NavButton" onClick={this.props.previousStep()}>Back</a>
+              <a className="NavButtonGreyed">Next</a>
+            </div>
+            </div>;
     }
 }
 
