@@ -5,13 +5,26 @@ import '../App.css';
 class UploadPage extends Component {
 
     render(){
-        return (<div>
+        return (<div className="container">
                 <h1>Upload Page</h1>
-                <a className="NavButtonGreyed">Back</a>
-                <a className="NavButton" onClick={ this.props.nextStep() }>Next</a>
+                <FormInput />
+                <div className="NavButtonGreyed">Back</div>
+                <div className="NavButton" onClick={ this.props.nextStep() }>Next</div>
               </div>);
     }
 }
+
+class FormInput extends Component {
+
+    render(){
+        return (<div>
+                    <input type="text" name="link" /><br /> 
+                    <div className="FormLine"></div>
+                </div>);
+
+    }
+}
+
 
 
 export default UploadPage;
