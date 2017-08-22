@@ -16,7 +16,7 @@ import SelectColumnPage from './2_select_column_page/SelectColumnPage';
 
 class App extends Component {
 
-    // Sets default state as 1
+    // Sets default page state as 1
     constructor(){
         super();
         this.state ={
@@ -24,6 +24,7 @@ class App extends Component {
         };
     }
 
+    // function to set how to get to next page (or next state)
     nextStep() {
         console.log();
         this.setState({
@@ -38,6 +39,7 @@ class App extends Component {
         })
     }
 
+    // function to show content of page
     showStep() {
         switch (this.state.step){
             case 1: 
@@ -49,18 +51,20 @@ class App extends Component {
                         />);
             default: 
                 return (<h1>Error, please check your entries are correct.</h1>);
-        }
-    }
-
-        render() {
-            return(
-            <div className="App">
-                <span className="progress-step">Step {this.state.step}</span>
-                <div>{this.showStep()}</div>
-            </div>
-            );
-        }
 }
+}
+
+    // Rendering "App"
+    render() {
+        return(
+        <div className="App">
+            <div className="progress-step">Step {this.state.step}</div>
+            {this.showStep()}
+        </div>
+        );
+}
+}
+
 
 
 export default App;
