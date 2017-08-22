@@ -13,26 +13,48 @@
 @blue-pantone: #0c9dbc;
 
 
-/*-----------mixins----------*/
+/*-----------mix-ins----------*/
 
 .button{
     border-radius: 4px;
-    padding: 2em 5em 2em 5em;
+    padding: 2em 3.5em 2em 3.5em;
     box-shadow: 0px 3px 5px 0px @grey-shadows;
-    margin: 1em;
+    margin: 2em 1em 5em 1em;
     cursor: pointer;
-}
-
-input{
-    border:none;
+    max-width: 30%;
 }
 
 .container{
     display: flex;
     flex-wrap: wrap;
-    height: 100%;
-    width: 100%;
     justify-content:center;
+    align-items: center;
+    align-content:space-between;
+}
+
+/*------------ flex -----------*/
+
+.flex-page{
+    width: 100%;
+    height: 100%;
+    .container
+}
+
+.flex-row{
+    width: 100%;
+    padding: 1em;
+    .container
+}
+
+/*----------- @media ----------*/
+
+@media only screen and (device-width: 768px),
+       only screen and (max-width: 768px) {
+
+    body{
+        font-size: 15px;
+    }
+
 }
 
 /*----------- ----------*/
@@ -41,6 +63,8 @@ body{
   overflow:hidden;
   box-sizing: border-box;
   text-align: center;
+  font-size: 15px;
+  margin: auto; // Needed for mobile
 }
 
 a{
@@ -52,7 +76,8 @@ a{
     width: 100vw;
 }
 
-/*--------------------NAVIGATION BUTTONS---------*/
+
+/*-------------------- NAVIGATION BUTTONS ---------*/
 
 .NavButton{
     color: @white;
@@ -71,6 +96,22 @@ a{
 }
 
 
+/*-------------------- FORM STYLING ---------*/
+
+
+input{
+    border:none;
+    height: 2em;
+
+    font-size: inherit;
+}
+
+.FormLine{
+    border-bottom: @red-dark 2px solid;
+    margin: 0px auto;
+}
+
+
 .PageContent{
     width: 100%;
     padding-top: 2em;
@@ -84,3 +125,4 @@ a{
         transform: translateX(100%);
     }
 }
+
