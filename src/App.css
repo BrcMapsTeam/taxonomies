@@ -5,6 +5,17 @@
   padding: 2em 5em 2em 5em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
   margin: 1em;
+  cursor: pointer;
+}
+input {
+  border: none;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
 }
 /*----------- ----------*/
 body {
@@ -18,9 +29,6 @@ a {
 .App {
   height: 100vh;
   width: 100vw;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
 }
 /*--------------------NAVIGATION BUTTONS---------*/
 .NavButton {
@@ -30,6 +38,7 @@ a {
   padding: 2em 5em 2em 5em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
   margin: 1em;
+  cursor: pointer;
 }
 .NavButton:hover {
   background-color: #057a64;
@@ -41,6 +50,7 @@ a {
   padding: 2em 5em 2em 5em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
   margin: 1em;
+  cursor: pointer;
 }
 .PageContent {
   width: 100%;
