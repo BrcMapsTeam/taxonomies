@@ -10,9 +10,9 @@ class SelectColumnPage extends Component {
 
     render(){
         return <div><h1>Column</h1>
-            <div className="NavigationContainer">
-              <a className="NavButton" onClick={this.props.previousStep()}>Back</a>
-              <a className="NavButtonGreyed">Next</a>
+            <div className="container">
+              <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
+              <div className="NavButtonGreyed">Next</div>
             </div>
             </div>;
     }
