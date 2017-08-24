@@ -4,29 +4,28 @@ import UploadPage from './1_upload_page/UploadPage';
 import SelectColumnPage from './2_select_column_page/SelectColumnPage';
 
 
-//let content = ["Please enter the link to your data:", 
-//    "Please select the #crisis column you wish to map:",
-//    "Which Taxonomy are you mapping FROM?",
-//    "Which Taxonomy are you mapping TO?",
-//    "The following term was not mappable.",
-//    "We have mapped the following terms, here is the HXL replacement map for it:",
-//    "Success your dataset has been converted, select the format you wish to download it in:"
-//]
-
+//GLOBAL VARIABLES
 
 class App extends Component {
 
     // Sets default page state as 1
     constructor(){
         super();
-        this.state ={
-            step: 1
+        this.state = {
+            step: 1,
+            value: ""
         };
+
+    this.handleLinkChange = this.handleLinkChange.bind(this);
     }
+
+    handleLinkChange(event) {
+        this.setState({value: event.target.value});
+    }
+
 
     // function to set how to get to next page (or next state)
     nextStep() {
-        console.log();
         this.setState({
             step : this.state.step + 1
         })
@@ -43,7 +42,7 @@ class App extends Component {
     showStep() {
         switch (this.state.step){
             case 1: 
-                return (<UploadPage nextStep={() => this.nextStep.bind(this)} />);
+                return (<UploadPage nextStep={() => this.nextStep.bind(this)} handleLinkChange={this.handleLinkChange.bind(this)} link={this.state.value} />);
             case 2:
                 return (<SelectColumnPage 
                             previousStep={() => this.previousStep.bind(this)} 
