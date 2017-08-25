@@ -9,18 +9,51 @@ import SelectColumnPage from './2_select_column_page/SelectColumnPage';
 class App extends Component {
 
     // Sets default page state as 1
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             step: 1,
-            value: ""
+            value: "",
+            data: ""
         };
 
-    this.handleLinkChange = this.handleLinkChange.bind(this);
+        this.handleLinkChange = this.handleLinkChange.bind(this);
+        this.getUserLink = this.getUserLink.bind(this);
     }
 
     handleLinkChange(event) {
         this.setState({value: event.target.value});
+    }
+
+
+    //ajax request to get json data
+    getUserLink(event) {
+
+        var userLink = this.state.value;
+
+        let getJSON = function(url) {
+            return new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('get', url, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                    var status = xhr.status;
+                    if (status === 200) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(status);
+                    }
+                };
+                xhr.send();
+            });
+        };
+
+        getJSON(userLink).then(function(data) {
+            this.setState({data:data});
+            console.log(this);
+        }.bind(this), function(status) { //error detection....
+            alert('Something went wrong.');
+        });
     }
 
 
@@ -38,11 +71,20 @@ class App extends Component {
         })
     }
 
+    nextAndSave(){
+        this.nextStep();
+        this.getUserLink();
+    }
     // function to show content of page
+
     showStep() {
         switch (this.state.step){
             case 1: 
-                return (<UploadPage nextStep={() => this.nextStep.bind(this)} handleLinkChange={this.handleLinkChange.bind(this)} link={this.state.value} />);
+                return (<UploadPage nextAndSave={this.nextAndSave.bind(this)} 
+                                    handleLinkChange={this.handleLinkChange.bind(this)} 
+                                    link={this.state.value} 
+                                    getUserLink = {this.getUserLink.bind(this)} />);
+
             case 2:
                 return (<SelectColumnPage 
                             previousStep={() => this.previousStep.bind(this)} 
