@@ -101,6 +101,7 @@ input {
   display: block;
   overflow: auto;
   max-width: 80%;
+  max-height: 15em;
 }
 .scrollable-table tr {
   height: 3em;

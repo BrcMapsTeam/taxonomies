@@ -25,6 +25,9 @@ class SelectColumnPage extends Component {
                         <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange}/>
                     </div>
                     <div className="flex-row">
+                        You have selected {this.props.crisisTag}.
+                    </div>
+                    <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
                          <div className="NavButtonGreyed">Next</div>
                     </div>
@@ -65,7 +68,6 @@ class DataTable extends Component {
         obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //Taking top 7 lines
         let finalTable =
         obj.data.map( function(row, i){
-            console.log("fahfkhaf=", this);
             const temp = row.map(function(item, i){ 
                 return <td key={i} id={item} className="clickable-cell" onClick={this.props.handleTagChange} >{item}</td>
             }, this //binds this inside of anonymous function
@@ -75,7 +77,7 @@ class DataTable extends Component {
         );
         return finalTable;
     }
-    // onClick={this.props.handleTagChange}
+
 
     render(){
 
@@ -84,7 +86,7 @@ class DataTable extends Component {
         let userData3 = "";
 
         if (userData !== loadingMessage && Object.keys(userData).length !== 0) {
-            console.log(Object.keys(userData).length !== 0);
+
             const headerParameters = {
                 'data': userData,
                 'rowStart': 0,

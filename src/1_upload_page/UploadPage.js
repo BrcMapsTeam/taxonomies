@@ -5,16 +5,11 @@ import '../App.css';
 //test link: https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966
 //goo.gl/VvNwF9
 
-//componentDidMount(){
-//    let nextButton = document.getElementById("loadFile");     
-//    AttachEvent(nextButton, "click", getUserLink);
-//}
-
 
 class UploadPage extends Component {
 
     render(){
-        console.log(this);
+
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
                     <div className="flex-row">

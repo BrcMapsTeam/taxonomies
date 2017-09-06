@@ -64,7 +64,6 @@ class App extends Component {
         };
 
         getJSON(userLink).then(function(userData) {
-            console.log("e=",this);
             this.setState({data:userData});
         }.bind(this), function(status) { //error detection....
             alert('Something went wrong.');
@@ -107,10 +106,10 @@ class App extends Component {
                 return (
                     <UploadPage 
                         nextAndSave={this.nextAndSave} 
-        handleLinkChange={this.handleLinkChange} 
-        link={this.state.value} 
-        getUserLink = {this.getUserLink} 
-     />);
+                        handleLinkChange={this.handleLinkChange} 
+                        link={this.state.value} 
+                        getUserLink = {this.getUserLink} 
+                     />);
 
         /*---------------------- PAGE 2 ---------------------------*/
             case 2:
@@ -119,6 +118,7 @@ class App extends Component {
                             handleTagChange = {this.handleTagChange}
                             data = {this.state.data}
                             crisisTag = {this.state.crisisTag}
+                            nextStep={() => this.nextStep}
                         />);
 
     /*---------------------- ERROR PAGE -----------------------*/
