@@ -107,6 +107,20 @@ class App extends Component {
 
     }
 
+    // function for selecting taxonomy FROM
+    selectMapFrom() {
+        this.setState({
+            mapFrom : this.state.mapFrom
+        })
+    }
+
+    // function for selecting taxonomy TO
+    selectMapTo() {
+        this.setState({
+            mapTo : this.state.mapTo
+        })
+    }
+
 
     //----------------- function to show content of page -----------------
 
