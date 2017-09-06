@@ -16,9 +16,9 @@ class UploadPage extends Component {
     render(){
         console.log(this);
         return (<div className="flex-page">
-                    <h1 className="flex-row">Upload Page</h1>
+                    <h2 className="flex-row">Disaster Taxonomies</h2>
                     <div className="flex-row">
-                        <div>Link to dataset you wish to map (example: goo.gl/VvNwF9):</div>
+                        <div>Link to dataset you wish to map (example: <a href="http://goo.gl/VvNwF9">Link</a>):</div>
                     </div> 
                     <div className="flex-row">
                         <FormInput handleLinkChange={this.props.handleLinkChange} link={this.props.link}/>
