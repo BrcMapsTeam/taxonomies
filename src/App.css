@@ -8,6 +8,9 @@
   cursor: pointer;
   max-width: 30%;
 }
+.clickable-cell:hover {
+  background-color: #b0b8bd;
+}
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -40,7 +43,7 @@
     font-size: 15px;
   }
 }
-/*----------- ----------*/
+/*----------- default css fixing ----------*/
 body {
   overflow: hidden;
   box-sizing: border-box;
@@ -93,11 +96,24 @@ input {
   width: 100%;
   padding-top: 2em;
 }
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
+/*-------------------- Table styling ---------*/
+.scrollable-table {
+  display: block;
+  overflow: auto;
+  max-width: 80%;
+}
+.scrollable-table tr {
+  height: 3em;
+}
+.scrollable-table tr:first-of-type + tr {
+  font-weight: 600;
+}
+.scrollable-table td {
+  min-width: 10em;
+}
+.scrollable-table tr:nth-child(odd) {
+  background: #ffffff;
+}
+.scrollable-table tr:nth-child(even) {
+  background: #f1f1f1;
 }

@@ -24,6 +24,12 @@
     max-width: 30%;
 }
 
+.clickable-cell{
+    &:hover{
+        background-color: @grey-shadows;
+    }
+}
+
 .container{
     display: flex;
     flex-wrap: wrap;
@@ -57,7 +63,7 @@
 
 }
 
-/*----------- ----------*/
+/*----------- default css fixing ----------*/
 
 body{
   overflow:hidden;
@@ -82,11 +88,12 @@ a{
 .NavButton{
     color: @white;
     background-color: @green-primary;
-    .button
-}
 
-.NavButton:hover{
-    background-color: @green-secondary;
+    &:hover{
+            background-color: @green-secondary;
+    }
+
+    .button
 }
 
 .NavButtonGreyed{
@@ -102,7 +109,6 @@ a{
 input{
     border:none;
     height: 2em;
-
     font-size: inherit;
 }
 
@@ -117,12 +123,32 @@ input{
     padding-top: 2em;
 }
 
-@keyframes slide{
-    from {
-        transform: translateX(0);
+
+/*-------------------- Table styling ---------*/
+
+.scrollable-table {
+        display:block;
+        overflow: auto;
+        max-width:80%;
+
+    tr {
+        height: 3em;
     }
-    to{
-        transform: translateX(100%);
+
+    tr:first-of-type + tr {
+        font-weight: 600;
+    }
+
+    td {
+        min-width: 10em;
+    }
+
+    tr:nth-child(odd) {
+        background: @white;
+    }
+
+    tr:nth-child(even) {
+        background: @grey-light;
     }
 }
 
