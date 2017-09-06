@@ -29,7 +29,7 @@ class SelectColumnPage extends Component {
                     </div>
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
-                         <div className="NavButtonGreyed">Next</div>
+                         <div className="NavButton" onClick={this.props.nextStep()}>Next</div>
                     </div>
                 </div>);
     }
