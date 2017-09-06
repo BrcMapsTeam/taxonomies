@@ -2,6 +2,10 @@ Source and info: https://github.com/facebookincubator/create-react-app
 
 [![Build Status](https://travis-ci.org/BrcMapsTeam/taxonomies.svg?branch=master)](https://travis-ci.org/BrcMapsTeam/taxonomies)
 
+## npm install
+
+This installs all the node dependencies for this project. This only needs to be done the very first time this project is downloaded. A "node_modules" folder should now appear in the same folder as package.json.
+
 ## Available Scripts
 
 In the project directory, you can run:
