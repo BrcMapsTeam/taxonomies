@@ -4,6 +4,7 @@ import UploadPage from './1_upload_page/UploadPage';
 import SelectColumnPage from './2_select_column_page/SelectColumnPage';
 import SelectTaxonomyFromPage from './3_select_taxonomy_from_page/SelectTaxonomyFromPage';
 import SelectTaxonomyToPage from './4_select_taxonomy_to_page/SelectTaxonomyToPage';
+import MapProcessPage from './5_mapping_process_page/MappingProcessPage';
 
 
 //GLOBAL VARIABLES
@@ -164,6 +165,13 @@ class App extends Component {
                             handleTaxToChange = {this.handleTaxToChange}
                             //data = {this.state.data}
                             taxToTag = {this.state.taxToTag}
+                            nextStep={() => this.nextStep}
+                        />);
+
+    /*---------------------- PAGE 5 ---------------------------*/ 
+            case 5:
+                return (<MapProcessPage 
+                            previousStep={() => this.previousStep}
                             nextStep={() => this.nextStep}
                         />);
 

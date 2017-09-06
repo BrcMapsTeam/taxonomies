@@ -6,14 +6,7 @@ import '../App.css';
 let loadingMessage = <tr><td>Loading...</td></tr>;
 
 class SelectColumnPage extends Component {
-    constructor(props){
-        super(props);
-        this.state =  {data: loadingMessage};
-    }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({data: nextProps.data});
-    }
 
     render(){
         return (<div className="flex-page">
