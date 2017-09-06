@@ -2,6 +2,8 @@ import React, { Component }  from 'react';
 import './App.css';
 import UploadPage from './1_upload_page/UploadPage';
 import SelectColumnPage from './2_select_column_page/SelectColumnPage';
+import SelectTaxonomyFromPage from './3_select_taxonomy_from_page/SelectTaxonomyFromPage';
+import SelectTaxonomyToPage from './4_select_taxonomy_to_page/SelectTaxonomyToPage';
 
 
 //GLOBAL VARIABLES
@@ -24,6 +26,8 @@ class App extends Component {
         //List of all functions in the App Class using "this"
         this.handleLinkChange = this.handleLinkChange.bind(this);
         this.handleTagChange = this.handleTagChange.bind(this);
+        this.handleMapFromChange = this.handleMapFromChange.bind(this);
+        this.handleMapToChange = this.handleMapToChange.bind(this);
         this.getUserLink = this.getUserLink.bind(this);
         this.nextAndSave = this.nextAndSave.bind(this);
         this.previousStep = this.previousStep.bind(this);
@@ -39,6 +43,14 @@ class App extends Component {
 
     handleTagChange(event) {
         this.setState({crisisTag: event.target.id});
+    }
+
+    handleMapFromChange(event) {
+        this.setState({mapFrom: event.target.mapFrom});
+    }
+
+    handleMapToChange(event) {
+        this.setState({mapTo: event.target.mapTo});
     }
 
     //ajax request to get json data
@@ -118,6 +130,26 @@ class App extends Component {
                             handleTagChange = {this.handleTagChange}
                             data = {this.state.data}
                             crisisTag = {this.state.crisisTag}
+                            nextStep={() => this.nextStep}
+                        />);
+
+    /*---------------------- PAGE 3 ---------------------------*/ 
+            case 3:
+                return (<SelectTaxonomyFromPage 
+                            previousStep={() => this.previousStep}
+                            handleTaxFromChange = {this.handleTaxFromChange}
+                            //data = {this.state.data}
+                            taxFromTag = {this.state.taxFromTag}
+                            nextStep={() => this.nextStep}
+                        />);
+
+    /*---------------------- PAGE 4 ---------------------------*/ 
+            case 4:
+                return (<SelectTaxonomyToPage 
+                            previousStep={() => this.previousStep}
+                            handleTaxToChange = {this.handleTaxToChange}
+                            //data = {this.state.data}
+                            taxToTag = {this.state.taxToTag}
                             nextStep={() => this.nextStep}
                         />);
 
