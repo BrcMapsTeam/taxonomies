@@ -5,10 +5,10 @@ import config_json from '../5_mapping_process_page/config.js';
 
 
 class MapProcessPage extends Component {
-    constructor(props){
-        super(props);
+    //constructor(props){
+    //    super(props);
 
-    }
+    //}
 
     render(){
         return (<div className="flex-page">
