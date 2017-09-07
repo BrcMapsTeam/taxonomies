@@ -114,20 +114,4 @@ class DataTable extends Component {
 }
 
 
-
-
-
-//class tableCell extends Component {
-
-//    render(){
-//        return(
-//            <>
-//        );
-//    }
-//}
-
-//dataForTable.map(row =>
-//    <tr>{row}</tr>
-//});
-
 export default SelectColumnPage;
