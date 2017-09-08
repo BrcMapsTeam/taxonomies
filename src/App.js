@@ -20,6 +20,7 @@ class App extends Component {
             value: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966",
             data: "Loading...",
             crisisTag: "nothing",
+            crisisColumnJson: "",
             mapFrom: "IFRC level 1",
             mapTo: "Glide"
         };
@@ -30,7 +31,9 @@ class App extends Component {
         this.handleMapFromChange = this.handleMapFromChange.bind(this);
         this.handleMapToChange = this.handleMapToChange.bind(this);
         this.getUserLink = this.getUserLink.bind(this);
+        this.getColumnData = this.getColumnData.bind(this);
         this.nextAndSave = this.nextAndSave.bind(this);
+        this.nextAndGetColumn = this.nextAndGetColumn.bind(this);
         this.previousStep = this.previousStep.bind(this);
         this.nextStep = this.nextStep.bind(this);
     }
@@ -84,6 +87,22 @@ class App extends Component {
     }
 
 
+    // gets column that user wants to convert from dataset 
+    getColumnData(event) {
+        let data = this.state.data;
+        let crisisTag = this.state.crisisTag;
+        let column = [];
+        let index = data[1].indexOf(crisisTag);
+
+        data.forEach(function(c, i){
+            column.push(c[index]);
+            console.log(c[index]);
+        });
+
+        this.setState({crisisColumnJson: column});
+    }
+
+
     // function to set how to get to next page (or next state)
     nextStep() {
         this.setState({
@@ -104,9 +123,12 @@ class App extends Component {
         this.getUserLink();
     }
 
-    getCrisisTag(){
-
+    // Same as nextStep but also gets data for column to be processed
+    nextAndGetColumn(){
+        this.nextStep();
+        this.getColumnData();
     }
+
 
     // function for selecting taxonomy FROM
     selectMapFrom() {
@@ -133,10 +155,10 @@ class App extends Component {
                 return (
                     <UploadPage 
                         nextAndSave={this.nextAndSave} 
-                        handleLinkChange={this.handleLinkChange} 
-                        link={this.state.value} 
-                        getUserLink = {this.getUserLink} 
-                     />);
+        handleLinkChange={this.handleLinkChange} 
+        link={this.state.value} 
+        getUserLink = {this.getUserLink} 
+     />);
 
         /*---------------------- PAGE 2 ---------------------------*/
             case 2:
@@ -145,7 +167,7 @@ class App extends Component {
                             handleTagChange = {this.handleTagChange}
                             data = {this.state.data}
                             crisisTag = {this.state.crisisTag}
-                            nextStep={() => this.nextStep}
+                            nextStep={() => this.nextAndGetColumn}
                         />);
 
     /*---------------------- PAGE 3 ---------------------------*/ 
@@ -153,7 +175,7 @@ class App extends Component {
                 return (<SelectTaxonomyFromPage 
                             previousStep={() => this.previousStep}
                             handleTaxFromChange = {this.handleTaxFromChange}
-                            //data = {this.state.data}
+    //data = {this.state.data}
                             taxFromTag = {this.state.taxFromTag}
                             nextStep={() => this.nextStep}
                         />);
@@ -163,7 +185,7 @@ class App extends Component {
                 return (<SelectTaxonomyToPage 
                             previousStep={() => this.previousStep}
                             handleTaxToChange = {this.handleTaxToChange}
-                            //data = {this.state.data}
+    //data = {this.state.data}
                             taxToTag = {this.state.taxToTag}
                             nextStep={() => this.nextStep}
                         />);
@@ -172,6 +194,8 @@ class App extends Component {
             case 5:
                 return (<MapProcessPage 
                             previousStep={() => this.previousStep}
+                            mapTo = {this.state.mapTo}
+                            mapFrom = {this.state.mapFrom}
                             nextStep={() => this.nextStep}
                         />);
 
