@@ -17,12 +17,12 @@ class App extends Component {
         super(props);
         this.state = {
             step: 1,
-            value: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966",
+            value: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966&force=on",
             data: "Loading...",
             crisisTag: "nothing",
             crisisColumnJson: "",
-            mapFrom: "IFRC level 1",
-            mapTo: "Glide"
+            mapFrom: "Glide",
+            mapTo: "IFRC level 1"
         };
 
         //List of all functions in the App Class using "this"
@@ -95,7 +95,8 @@ class App extends Component {
         let index = data[1].indexOf(crisisTag);
 
         data.forEach(function(c, i){
-            column.push(c[index]);
+            //to capital case
+            column.push(c[index].replace(/\b\w/g, function(l){ return l.toUpperCase() }));
         });
 
         this.setState({crisisColumnJson: column});
