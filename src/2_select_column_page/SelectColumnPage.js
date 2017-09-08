@@ -16,7 +16,7 @@ let loadingMessage = <tr><td>Loading...</td></tr>;
 class SelectColumnPage extends Component {
 
     render(){
-        console.log(this.props.data);
+
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
                     <div className="flex-row">

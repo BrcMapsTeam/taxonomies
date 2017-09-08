@@ -96,7 +96,6 @@ class App extends Component {
 
         data.forEach(function(c, i){
             column.push(c[index]);
-            console.log(c[index]);
         });
 
         this.setState({crisisColumnJson: column});
@@ -196,6 +195,8 @@ class App extends Component {
                             previousStep={() => this.previousStep}
                             mapTo = {this.state.mapTo}
                             mapFrom = {this.state.mapFrom}
+                            data = {this.state.data}
+                            crisisColumnJson = {this.state.crisisColumnJson}
                             nextStep={() => this.nextStep}
                         />);
 

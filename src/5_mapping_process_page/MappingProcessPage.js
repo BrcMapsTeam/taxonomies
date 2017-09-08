@@ -16,7 +16,7 @@ class MapProcessPage extends Component {
 
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
-                         <div className="NavButtonGreyed" onClick={test()}>Next </div>
+                         <div className="NavButtonGreyed" onClick={test()}>Next</div>
                     </div>
                 </div>);
     }
@@ -46,7 +46,6 @@ let tax = {
 
     config: function(config_json){
         this._config = config_json;
-        //console.log(this);
         return this;
     },
 
@@ -86,14 +85,10 @@ let tax = {
                 return;
             }
 
-            console.log("aaa=",this._tax1, this._tax2);
             let tax1Call = this._loadTaxonomy(this._tax1.url);
             let tax2Call = this._loadTaxonomy(this._tax2.url);
-            console.log(tax2Call);
 
             let map = parent._createMap(tax1Call,tax2Call);
-            console.log("map= ", map);
-            //parent._readyFunction(map);
             return map;
 
 
@@ -135,10 +130,8 @@ let tax = {
         //----------------------------- this.loadTaxonomy ------------------------------
 
         this._loadTaxonomy = function(url){
-            console.log(url);
             if (url !== null || url !== undefined) {
                 var taxonomyMap = require("../" + url);
-                console.log("taxonomyMap =", taxonomyMap);
                 return taxonomyMap;
             } else {
                 console.log("Error loading taxonomy map, please check url in config file!");
