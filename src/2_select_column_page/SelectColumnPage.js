@@ -5,8 +5,15 @@ import '../App.css';
 
 let loadingMessage = <tr><td>Loading...</td></tr>;
 
-class SelectColumnPage extends Component {
+/*--------------------------------------------------------------------------------*/
 
+/*                           SELECT COLUMN PAGE                               */
+
+/*--------------------------------------------------------------------------------*/
+
+
+
+class SelectColumnPage extends Component {
 
     render(){
         return (<div className="flex-page">
@@ -29,7 +36,15 @@ class SelectColumnPage extends Component {
 }
 
 
+/*--------------------------------------------------------------------------------*/
+
+/*                           DATA-TABLE                                            */
+
+/*--------------------------------------------------------------------------------*/
+
+
 class DataTable extends Component {
+
     constructor(props){
         super(props);
         this.state =  {data: loadingMessage};
@@ -38,6 +53,7 @@ class DataTable extends Component {
     componentWillReceiveProps(nextProps){
         this.setState({data:nextProps.data});
     }
+
 
     // Object should contain: data, start and end of rows to be processed, th/td/other tags
     // e.g.: parseData({data:data, rowStart:0, rowEnd:10})
@@ -56,8 +72,10 @@ class DataTable extends Component {
         return finalTable;
     }
 
-    parseTag(obj){
 
+    // ---- Parsing the clickable cells containing #HXL tags
+
+    parseTag(obj){
         obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //Taking top 7 lines
         let finalTable =
         obj.data.map( function(row, i){

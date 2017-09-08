@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
 import '../App.css';
-import config_json from '../5_mapping_process_page/config.js';
+import config_json from '../taxonomy_maps/config.js';
 
 
 class MapProcessPage extends Component {
@@ -27,19 +27,14 @@ let test = function(){
 
         tax.config(config_json);
         var newMap = new tax.createMap('Glide','IFRC level 1');
-        newMap.ready(function(map){
-            console.log(map);
-        });
+            console.log(newMap);
 
         var newMap2 = new tax.createMap('IFRC level 2','IFRC level 1');
-        newMap2.ready(function(map){
-            console.log(map);
-        });
+            console.log(newMap2);
 
         var newMap3 = new tax.createMap('IFRC level 1','IFRC level 3');
-        newMap3.ready(function(map){
-            console.log(map);
-        });
+
+
     };
 
 
@@ -54,6 +49,8 @@ let tax = {
         //console.log(this);
         return this;
     },
+
+    //----------------------------- CREATEMAP ------------------------------
 
     createMap: function(tax1,tax2){
 
@@ -96,7 +93,7 @@ let tax = {
 
             let map = parent._createMap(tax1Call,tax2Call);
             console.log("map= ", map);
-            parent._readyFunction(map);
+            //parent._readyFunction(map);
             return map;
 
 
@@ -150,8 +147,10 @@ let tax = {
         };
 
 
-        this.init();
-    }
+        let map = this.init();
+        return map;
+
+    } // END THIS.CREATEMAP
 
 };
 
