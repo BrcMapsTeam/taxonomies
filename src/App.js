@@ -19,10 +19,10 @@ class App extends Component {
             step: 1,
             value: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966&force=on",
             data: "Loading...",
-            crisisTag: "nothing",
+            crisisTag: "#crisis+name",
             crisisColumnJson: "",
             mapFrom: "Glide",
-            mapTo: "IFRC level 1"
+            mapTo: "IFRC level 4"
         };
 
         //List of all functions in the App Class using "this"

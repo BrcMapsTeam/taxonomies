@@ -5,38 +5,151 @@ import config_json from '../taxonomy_maps/config.js';
 
 
 class MapProcessPage extends Component {
-    //constructor(props){
-    //    super(props);
 
-    //}
+    constructor(props){
+        super(props);
+        this.state = {
+            finishedProcessing: 'no',
+            currentWordFrom: '',
+            currentArrayTo: [],
+            newColumn: [],
+            dataInNeedOfProcessing: [],
+            step: 0
+        };
+
+        this.nextWordHandler = this.nextWordHandler.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({data:nextProps.data});
+    }
+
+    componentWillMount(){
+        this.processData();
+    }
+
+    nextWordHandler(event){
+        const index = event.target.id.match(/\d+/g);
+        const word = event.target.id.match(/[a-zA-Z]+/g);
+        console.log(index);
+        console.log(word);
+        let tempArray = this.state.newColumn.slice();
+        tempArray[index] = word;
+
+        this.setState({newColumn: tempArray});
+
+        if(this.state.step === this.state.dataInNeedOfProcessing.length-1){
+            this.setState({finishedProcessing: 'yes'});
+        } else {
+            this.setState({step: this.state.step + 1});
+        }
+
+    }
+
+    showProcessingState() {
+        console.log(this.state.dataInNeedOfProcessing);
+        switch (this.state.finishedProcessing){
+            case 'no':
+                return (
+                    <div>
+                    <p>Step {this.state.step}</p>
+                        {this.state.dataInNeedOfProcessing[this.state.step]}
+                    </div>
+                    );
+            case 'yes':
+                return (
+                    <div>
+                    <p>
+                        "Success, we have converted all of your data!"
+                    </p>
+                            <div>{this.state.newColumn}</div>
+                    </div>
+                );
+            default: return (
+                    <div className="flex-row">
+                        {this.state.finishedProcessing}
+                    </div>
+                );
+        }
+    }
+
+    processData(){
+        const column = this.props.crisisColumnJson;
+        let newColumn = [];
+        let dataInNeedOfProcessing = [];
+        let wordFrom;
+
+        //Creating taxonomy map
+        tax.config(config_json);
+        let taxonomyMap = new tax.createMap(this.props.mapFrom, this.props.mapTo);
+
+        column.forEach(function(c, i){
+            if (i>1) {
+                console.log(taxonomyMap['test']);
+                if (taxonomyMap[c] !== undefined){
+                    if (taxonomyMap[c].length > 1){
+                        dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
+                    } else { //if length not > 1 add to array of translated taxonomies
+                        newColumn[i] = taxonomyMap[c][0] || " ";
+                    }
+                } else { //if it's undefined add empty cell
+                    newColumn[i] = " ";
+                }
+            }
+        }); // end for Each
+
+        if(dataInNeedOfProcessing.length === 0){
+            this.setState({ finishedProcessing: 'yes'});
+        } else {
+
+        wordFrom = dataInNeedOfProcessing.map(function(item, i){
+            const listOfChoices = item[1].map(function(word, j){ 
+                const id = word+item[2];
+                return <div className="button-small" onClick={this.nextWordHandler} key={j} id={id}>{word}</div>
+            }, this);
+
+            return (
+                <div>
+                    <div key={i}>How would you map the following item: {item[0]}</div>
+                    <div className="flex-row">{listOfChoices}</div>
+                </div>);
+        }, this);
+        };
+        this.setState({ newColumn: newColumn });
+        this.setState({ dataInNeedOfProcessing: wordFrom });
+    }
+
+
+
 
     render(){
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
-
+                        //{this.showProcessingState()}
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
-                         <div className="NavButtonGreyed" onClick={test()}>Next</div>
+                         <div className="NavButtonGreyed">Next</div>
                     </div>
                 </div>);
     }
 }
 
 
-let test = function(){
+class UserInput extends Component {
 
-        tax.config(config_json);
-        var newMap = new tax.createMap('Glide','IFRC level 1');
-            console.log(newMap);
+    render(){
+        
+        const items = this.props.buttons.map(function(item, i){ 
+            return <div className="button">{item}</div>
+        });
 
-        var newMap2 = new tax.createMap('IFRC level 2','IFRC level 1');
-            console.log(newMap2);
-
-        var newMap3 = new tax.createMap('IFRC level 1','IFRC level 3');
-
-
-    };
-
+        return (
+        <div>
+            {items}
+        </div>
+        );
+    }
+}
 
 
 
@@ -146,6 +259,7 @@ let tax = {
     } // END THIS.CREATEMAP
 
 };
+
 
 
 

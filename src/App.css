@@ -8,6 +8,14 @@
   cursor: pointer;
   max-width: 30%;
 }
+.button-small {
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  box-shadow: 0px 3px 5px 0px #b0b8bd;
+  margin: 2em 1em 5em 1em;
+  cursor: pointer;
+  max-width: 30%;
+}
 .clickable-cell:hover {
   background-color: #b0b8bd;
 }
