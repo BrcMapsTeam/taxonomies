@@ -11,10 +11,14 @@
 .button-small {
   border-radius: 4px;
   padding: 0.5em 0.5em 0.5em 0.5em;
+  margin: 1em 1em 1em 1em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
-  margin: 2em 1em 5em 1em;
   cursor: pointer;
   max-width: 30%;
+}
+.button-small:hover {
+  background-color: #0c9dbc;
+  color: white;
 }
 .clickable-cell:hover {
   background-color: #b0b8bd;
@@ -125,4 +129,7 @@ input {
 }
 .scrollable-table tr:nth-child(even) {
   background: #f1f1f1;
+}
+.temp {
+  padding: 3em;
 }

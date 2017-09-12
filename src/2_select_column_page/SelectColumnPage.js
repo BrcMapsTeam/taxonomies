@@ -16,7 +16,6 @@ let loadingMessage = <tr><td>Loading...</td></tr>;
 class SelectColumnPage extends Component {
 
     render(){
-
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
                     <div className="flex-row">
@@ -26,7 +25,7 @@ class SelectColumnPage extends Component {
                         <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange}/>
                     </div>
                     <div className="flex-row">
-                        You have selected {this.props.crisisTag}.
+                       <span>You have selected &nbsp;</span><b>{this.props.crisisTag}</b>.
                     </div>
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>

@@ -50,10 +50,10 @@ class MapProcessPage extends Component {
         switch (this.state.finishedProcessing){
             case 'no':
                 return (
-                    <div>
+                    <div className="flex-row">
                     <p>Step {this.state.step}</p>
-        {this.state.dataInNeedOfProcessing[this.state.step]}
-        </div>
+                    {this.state.dataInNeedOfProcessing[this.state.step]}
+                    </div>
                     );
             case 'yes':
                 return (
@@ -62,7 +62,11 @@ class MapProcessPage extends Component {
                             Success, we have converted all of your data!
                         </div>
                         <div className="flex-row">
-                            <table className="scrollable-table"><tbody>{this.createTable(this.props.crisisColumnJson, this.state.newColumn)}</tbody></table>
+                            <table className="scrollable-table">
+                                <tbody>
+                                    {this.createTable(this.props.crisisColumnJson, this.state.newColumn)}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 );
@@ -104,14 +108,23 @@ class MapProcessPage extends Component {
 
         wordFrom = dataInNeedOfProcessing.map(function(item, i){
             const listOfChoices = item[1].map(function(word, j){ 
-                const id = word+item[2];
+                const id = word + item[2];
                 return <div className="button-small" onClick={this.nextWordHandler} key={j} id={id}>{word}</div>
             }, this);
 
+            const dataHeaders = {"data": this.props.data, "rowStart": 0, "rowEnd": 1 };
+            const currentRow = {"data": this.props.data, "rowStart": item[2], "rowEnd": item[2]+1 };
+
             return (
-                <div>
-                    <div key={i}>How would you map the following item: {item[0]}</div>
-                    <div className="flex-row">{listOfChoices}</div>
+                <div className="flex-row">
+                        <div className="flex-row" key={i}><span>How would you map the following item: </span><b>{item[0]}</b></div>
+                        <div className="flex-row">{listOfChoices}</div>
+                        <div className="flex-row">
+                            This is a snapshot of the corresponding row:
+                        </div>
+                        <div className="flex-row">
+                            <table className="scrollable-table" ><tbody>{this.parseData(dataHeaders)}{this.parseData(currentRow)}</tbody></table>
+                        </div>
                 </div>);
         }, this);
         };
@@ -136,7 +149,22 @@ class MapProcessPage extends Component {
         );
 
         return finalTable;
-    }
+        }
+
+
+       parseData(obj){
+            obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); 
+
+            let finalTable =
+            obj.data.map( function(row, i){
+                const temp = row.map(function(item, i){ 
+                    return <td key={i}>{item}</td>
+                });
+                return <tr key={i}>{temp}</tr>;
+            }
+            );
+            return finalTable;
+        }
 
 
     render(){
