@@ -31,8 +31,7 @@ class MapProcessPage extends Component {
     nextWordHandler(event){
         const index = event.target.id.match(/\d+/g);
         const word = event.target.id.match(/[a-zA-Z]+/g);
-        console.log(index);
-        console.log(word);
+
         let tempArray = this.state.newColumn.slice();
         tempArray[index] = word;
 
@@ -47,7 +46,7 @@ class MapProcessPage extends Component {
     }
 
     showProcessingState() {
-        console.log(this.state.dataInNeedOfProcessing);
+
         switch (this.state.finishedProcessing){
             case 'no':
                 return (
@@ -85,7 +84,6 @@ class MapProcessPage extends Component {
 
         column.forEach(function(c, i){
             if (i>1) {
-                console.log(taxonomyMap['test']);
                 if (taxonomyMap[c] !== undefined){
                     if (taxonomyMap[c].length > 1){
                         dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
@@ -133,24 +131,6 @@ class MapProcessPage extends Component {
                 </div>);
     }
 }
-
-
-class UserInput extends Component {
-
-    render(){
-        
-        const items = this.props.buttons.map(function(item, i){ 
-            return <div className="button">{item}</div>
-        });
-
-        return (
-        <div>
-            {items}
-        </div>
-        );
-    }
-}
-
 
 
 let tax = {
