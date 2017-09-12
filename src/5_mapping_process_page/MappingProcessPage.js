@@ -52,16 +52,18 @@ class MapProcessPage extends Component {
                 return (
                     <div>
                     <p>Step {this.state.step}</p>
-                        {this.state.dataInNeedOfProcessing[this.state.step]}
-                    </div>
+        {this.state.dataInNeedOfProcessing[this.state.step]}
+        </div>
                     );
             case 'yes':
                 return (
-                    <div>
-                    <p>
-                        "Success, we have converted all of your data!"
-                    </p>
-                            <div>{this.state.newColumn}</div>
+                    <div className="flex-row">
+                        <div className="flex-row">
+                            Success, we have converted all of your data!
+                        </div>
+                        <div className="flex-row">
+                            <table className="scrollable-table"><tbody>{this.createTable(this.props.crisisColumnJson, this.state.newColumn)}</tbody></table>
+                        </div>
                     </div>
                 );
             default: return (
@@ -96,7 +98,7 @@ class MapProcessPage extends Component {
             }
         }); // end for Each
 
-        if(dataInNeedOfProcessing.length === 0){
+        if (dataInNeedOfProcessing.length === 0){
             this.setState({ finishedProcessing: 'yes'});
         } else {
 
@@ -117,13 +119,30 @@ class MapProcessPage extends Component {
         this.setState({ dataInNeedOfProcessing: wordFrom });
     }
 
+    createTable(array1,array2){
+        let combinedArray = [];
+        array1.forEach(function(c, i){
+            combinedArray.push([c,array2[i]]);
+        });
+        console.log(combinedArray);
 
+        let finalTable =
+        combinedArray.map( function(item, i){
+            return (<tr key={i}>
+                            <td>{item[0]}</td>
+                            <td>{item[1]}</td>
+                            </tr>);
+        }
+        );
+
+        return finalTable;
+    }
 
 
     render(){
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
-                        //{this.showProcessingState()}
+                        {this.showProcessingState()}
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
                          <div className="NavButtonGreyed">Next</div>
