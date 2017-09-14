@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import '../App.css';
 
 
-let loadingMessage = <tr><td className="waiting">Loading...</td></tr>;
-
-
 /*--------------------------------------------------------------------------------*/
 
 /*                           SELECT COLUMN PAGE                               */
@@ -45,7 +42,7 @@ class SelectColumnPage extends Component {
             return (<div className="NavButtonGreyed">Next</div>);
         } else {
             return (<div className="NavButton" onClick={this.props.nextStep()}>Next</div>);
-        };
+        }
     }
 
     render(){
@@ -81,7 +78,6 @@ class DataTable extends Component {
 
     constructor(props){
         super(props);
-        console.log(this);
         this.state =  {data: this.props.data};
     }
 
@@ -111,7 +107,7 @@ class DataTable extends Component {
     // ---- Parsing the clickable cells containing #HXL tags
 
     parseTag(obj){
-        console.log(obj);
+
         obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //Taking top 7 lines
         let finalTable =
         obj.data.map( function(row, i){
@@ -127,14 +123,14 @@ class DataTable extends Component {
 
 
     render(){
-        console.log(this.state.data);
+
         let userData = this.state.data;
         let userData2 = "";
         let userData3 = "";
 
         //Checks that this.state.data is not "<tr>Loading</tr>"
         if (userData.type !== "tr" && Object.keys(userData).length !== 0) {
-            console.log(Object.keys(userData).type);
+
             const headerParameters = {
                 'data': userData,
                 'rowStart': 0,
