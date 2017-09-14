@@ -8,6 +8,14 @@ import '../App.css';
 
 class UploadPage extends Component {
 
+    //Makes text field come into focus on page load
+    componentDidMount(){
+        var input = document.getElementById("data_link");
+
+        input.focus();
+        input.select();
+    }
+
     render(){
 
         return (<div className="flex-page">
