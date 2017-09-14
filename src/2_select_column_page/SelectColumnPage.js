@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import '../App.css';
 
 
-let loadingMessage = <tr><td>Loading...</td></tr>;
+let loadingMessage = <tr><td className="waiting">Loading...</td></tr>;
+
 
 /*--------------------------------------------------------------------------------*/
 
@@ -15,7 +16,40 @@ let loadingMessage = <tr><td>Loading...</td></tr>;
 
 class SelectColumnPage extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            buttonReady: 'no'
+        };
+    }
+
+    //When new data is loaded un-grey the button
+    componentWillReceiveProps(nextProps){
+
+        if (nextProps.data !== this.props.data) {
+            this.setState({buttonReady: 'yes'});
+        }
+    }
+
+    //If user goes from next page back to this page and data is already loaded, un-grey the button
+    componentDidMount(){
+        const data = this.props.data;
+        if (data.type !== "tr" && Object.keys(data).length !== 0) {
+            this.setState({buttonReady: 'yes'});
+        }
+    }
+
+    //Function checks whether the data is loaded and if not the button stays greyed out
+    nextButton(){
+        if (this.state.buttonReady !== 'yes') {
+            return (<div className="NavButtonGreyed">Next</div>);
+        } else {
+            return (<div className="NavButton" onClick={this.props.nextStep()}>Next</div>);
+        };
+    }
+
     render(){
+
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
                     <div className="flex-row">
@@ -29,7 +63,7 @@ class SelectColumnPage extends Component {
                     </div>
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
-                         <div className="NavButton" onClick={this.props.nextStep()}>Next</div>
+                         {this.nextButton()}
                     </div>
                 </div>);
     }
@@ -47,7 +81,8 @@ class DataTable extends Component {
 
     constructor(props){
         super(props);
-        this.state =  {data: loadingMessage};
+        console.log(this);
+        this.state =  {data: this.props.data};
     }
 
     componentWillReceiveProps(nextProps){
@@ -76,6 +111,7 @@ class DataTable extends Component {
     // ---- Parsing the clickable cells containing #HXL tags
 
     parseTag(obj){
+        console.log(obj);
         obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //Taking top 7 lines
         let finalTable =
         obj.data.map( function(row, i){
@@ -91,13 +127,14 @@ class DataTable extends Component {
 
 
     render(){
-
+        console.log(this.state.data);
         let userData = this.state.data;
         let userData2 = "";
         let userData3 = "";
 
-        if (userData !== loadingMessage && Object.keys(userData).length !== 0) {
-
+        //Checks that this.state.data is not "<tr>Loading</tr>"
+        if (userData.type !== "tr" && Object.keys(userData).length !== 0) {
+            console.log(Object.keys(userData).type);
             const headerParameters = {
                 'data': userData,
                 'rowStart': 0,

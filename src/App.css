@@ -133,3 +133,11 @@ input {
 .temp {
   padding: 3em;
 }
+/*-------------------- General styling ---------*/
+/*needs keyframe animation below*/
+.waiting {
+  color: #98192a;
+}
+.waiting ::after {
+  content: "...";
+}
