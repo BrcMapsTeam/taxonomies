@@ -28,9 +28,10 @@ class UploadPage extends Component {
 
 class FormInput extends Component {
     render(){
-        return (<div>
-                    <input type="text" name="link" id="data_link" value={this.props.link} onChange={this.props.handleLinkChange}/><br /> 
-                    <div className="FormLine"></div>
+        return (<div className="flex-row">
+                    <div className="flex-row">
+                        <input type="text" name="link" id="data_link" value={this.props.link} onChange={this.props.handleLinkChange}/>
+                    </div>
                 </div>);
     }
 }

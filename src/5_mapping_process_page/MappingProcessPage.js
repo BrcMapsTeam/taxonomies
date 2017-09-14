@@ -51,7 +51,7 @@ class MapProcessPage extends Component {
             case 'no':
                 return (
                     <div className="flex-row">
-                    <p>Step {this.state.step}</p>
+                    Step &nbsp;<b>{this.state.step}</b>
                     {this.state.dataInNeedOfProcessing[this.state.step]}
                     </div>
                     );
@@ -117,7 +117,7 @@ class MapProcessPage extends Component {
 
             return (
                 <div className="flex-row">
-                        <div className="flex-row" key={i}><span>How would you map the following item: </span><b>{item[0]}</b></div>
+                        <div className="flex-row" key={i}><span>How would you map the following item:&nbsp;</span><b>{item[0]}</b></div>
                         <div className="flex-row">{listOfChoices}</div>
                         <div className="flex-row">
                             This is a snapshot of the corresponding row:
