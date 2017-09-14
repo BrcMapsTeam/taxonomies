@@ -155,10 +155,10 @@ class App extends Component {
                 return (
                     <UploadPage 
                         nextAndSave={this.nextAndSave} 
-        handleLinkChange={this.handleLinkChange} 
-        link={this.state.value} 
-        getUserLink = {this.getUserLink} 
-     />);
+                        handleLinkChange={this.handleLinkChange} 
+                        link={this.state.value} 
+                        getUserLink = {this.getUserLink} 
+                     />);
 
         /*---------------------- PAGE 2 ---------------------------*/
             case 2:
@@ -175,7 +175,6 @@ class App extends Component {
                 return (<SelectTaxonomyFromPage 
                             previousStep={() => this.previousStep}
                             handleTaxFromChange = {this.handleTaxFromChange}
-    //data = {this.state.data}
                             taxFromTag = {this.state.taxFromTag}
                             nextStep={() => this.nextStep}
                         />);
@@ -185,7 +184,6 @@ class App extends Component {
                 return (<SelectTaxonomyToPage 
                             previousStep={() => this.previousStep}
                             handleTaxToChange = {this.handleTaxToChange}
-    //data = {this.state.data}
                             taxToTag = {this.state.taxToTag}
                             nextStep={() => this.nextStep}
                         />);
@@ -212,8 +210,7 @@ class App extends Component {
     render() {
         return(
         <div className="App">
-{this.showStep()}
-            <div className="progress-step">Step {this.state.step}</div>
+            {this.showStep()}
         </div>
         );
 }
