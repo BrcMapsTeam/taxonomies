@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
 import '../App.css';
 
-//test link: https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966
-//goo.gl/VvNwF9
-
-
 class UploadPage extends Component {
 
     //Makes text field come into focus on page load
@@ -21,8 +17,13 @@ class UploadPage extends Component {
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
                     <div className="flex-row">
-                        <div>Link to dataset you wish to map (example: <a href="http://goo.gl/VvNwF9">Link</a>):</div>
-                    </div> 
+                        <div>Link to JSON dataset you wish to map (example: <a href="http://goo.gl/VvNwF9">Link</a>):</div>
+                    </div>
+                    <div className="flex-row">
+                       <div className="small">If you have a googleSheet please use the HXL Proxy 
+                            (<a href="https://proxy.hxlstandard.org/data/source">Link</a>) to generate an online JSON version of the file.
+                       </div>
+                    </div>
                     <div className="flex-row">
                         <FormInput handleLinkChange={this.props.handleLinkChange} link={this.props.link}/>
                     </div>

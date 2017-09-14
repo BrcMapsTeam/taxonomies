@@ -2,19 +2,21 @@
 /*-----------mix-ins----------*/
 .button {
   border-radius: 4px;
-  padding: 2em 3.5em 2em 3.5em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
-  margin: 2em 1em 5em 1em;
   cursor: pointer;
   max-width: 30%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 .button-small {
+  padding: 0.7em 0.5em 0.7em 0.5em;
+  margin: 0.5em 0.5em 0.5em 0.5em;
   border-radius: 4px;
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  margin: 1em 1em 1em 1em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
   cursor: pointer;
   max-width: 30%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 .button-small:hover {
   background-color: #0c9dbc;
@@ -70,29 +72,37 @@ a {
   height: 100vh;
   width: 100vw;
 }
+.small {
+  font-size: 12px;
+  color: #bdb6b0;
+}
 /*-------------------- NAVIGATION BUTTONS ---------*/
 .NavButton {
+  padding: 2em 3.5em 2em 3.5em;
+  margin: 2em 1em 5em 1em;
   color: #ffffff;
   background-color: #02b196;
   border-radius: 4px;
-  padding: 2em 3.5em 2em 3.5em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
-  margin: 2em 1em 5em 1em;
   cursor: pointer;
   max-width: 30%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 .NavButton:hover {
   background-color: #057a64;
 }
 .NavButtonGreyed {
+  padding: 2em 3.5em 2em 3.5em;
+  margin: 2em 1em 5em 1em;
   color: #f1f1f1;
   background-color: #bdb6b0;
   border-radius: 4px;
-  padding: 2em 3.5em 2em 3.5em;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
-  margin: 2em 1em 5em 1em;
   cursor: pointer;
   max-width: 30%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 /*-------------------- FORM STYLING ---------*/
 input {
@@ -141,3 +151,14 @@ input {
 .waiting ::after {
   content: "...";
 }
+/*@keyframes hoverTransition {
+    0% {
+        transform: ;
+    }
+    50% {
+
+    }
+    100% {
+
+    }
+}*/
