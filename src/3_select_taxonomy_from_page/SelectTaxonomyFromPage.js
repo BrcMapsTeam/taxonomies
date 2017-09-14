@@ -22,7 +22,7 @@ export class TaxButtonElement extends Component {
         //console.log("in TaxButtonElement: ", this);
         var onOff = this.state.selected ? 'on': 'off';
         return (
-            <button className={'TaxButton' + ' ' + onOff} onClick={this.handleClick}>{this.props.text}</button>
+            <button className={onOff} onClick={this.handleClick}>{this.props.text}</button>
         );
     }
 };

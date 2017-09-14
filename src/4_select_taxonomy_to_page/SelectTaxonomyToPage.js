@@ -4,9 +4,6 @@ import '../App.css';
 
 class SelectTaxonomyToPage extends Component {
 
-    constructor(props){
-        super(props);
-    }
 
     render(){
         return (<div className="flex-page">
