@@ -7,9 +7,11 @@ class UploadPage extends Component {
     //Makes text field come into focus on page load
     componentDidMount(){
         var input = document.getElementById("data_link");
+        if (input !== undefined && input !== null) {
+            input.focus();
+            input.select();
+        }
 
-        input.focus();
-        input.select();
     }
 
     render(){

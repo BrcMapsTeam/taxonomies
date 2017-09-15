@@ -45,6 +45,16 @@ class SelectColumnPage extends Component {
         }
     }
 
+    tableLoading(){
+        if (this.state.buttonReady !== 'yes') {
+            return(this.props.data);
+        } else {
+            return (<div className="flex-row">
+                    <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange}/>
+                    </div>);
+        }
+    }
+
     render(){
 
         return (<div className="flex-page">
@@ -52,9 +62,7 @@ class SelectColumnPage extends Component {
                     <div className="flex-row">
                         <div>Please select the <b>#crisis</b> column you wish to map:</div>
                     </div> 
-                    <div className="flex-row">
-                        <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange}/>
-                    </div>
+                        {this.tableLoading()}
                     <div className="flex-row">
                        <span>You have selected &nbsp;</span><b>{this.props.crisisTag}</b>.
                     </div>

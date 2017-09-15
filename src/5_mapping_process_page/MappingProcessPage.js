@@ -4,6 +4,15 @@ import '../App.css';
 import config_json from '../taxonomy_maps/config.js';
 
 
+//---------------------------------------------------------------------------------------
+
+//---                           MAIN CLASS: DEFINES PAGE                       ---------
+
+//--------------------------------------------------------------------------------------
+
+
+
+
 class MapProcessPage extends Component {
 
     constructor(props){
@@ -28,6 +37,11 @@ class MapProcessPage extends Component {
         this.processData();
     }
 
+    //-----------------------------------------------------------------------
+    //--------------------- PROCESSING USER CHOICES ------------------------
+    //-----------------------------------------------------------------------
+
+
     nextWordHandler(event){
         const index = event.target.id.match(/\d+/g);
         const word = event.target.id.match(/[a-zA-Z]+/g);
@@ -45,9 +59,15 @@ class MapProcessPage extends Component {
 
     }
 
+    //-----------------------------------------------------------------------
+    //---------------- DECIDE WHAT TO RENDER ON PAGE ------------------------
+    //-----------------------------------------------------------------------
+
     showProcessingState() {
 
         switch (this.state.finishedProcessing){
+
+            // ---------- CASE: not finished processing ------------------
             case 'no':
                 return (
                     <div className="flex-row">
@@ -55,6 +75,9 @@ class MapProcessPage extends Component {
                     {this.state.dataInNeedOfProcessing[this.state.step]}
                     </div>
                     );
+
+           // ---------- CASE: done processing ------------------
+
             case 'yes':
                 return (
                     <div className="flex-row">
@@ -70,6 +93,9 @@ class MapProcessPage extends Component {
                         </div>
                     </div>
                 );
+
+            // ---------- DEFAULT ------------------
+
             default: return (
                     <div className="flex-row">
                         {this.state.finishedProcessing}
@@ -77,6 +103,11 @@ class MapProcessPage extends Component {
                 );
         }
     }
+
+    //----------------------------------------------------------------------------------
+    //---------------- GENERATING NEW DATA AND QUESTIONS TO USER ------------------------
+    //----------------------------------------------------------------------------------
+
 
     processData(){
         const column = this.props.crisisColumnJson;
@@ -112,6 +143,7 @@ class MapProcessPage extends Component {
                 return <div className="button-small" onClick={this.nextWordHandler} key={j} id={id}>{word}</div>
             }, this);
 
+            //Defining How the table will look like
             const dataHeaders = {"data": this.props.data, "rowStart": 0, "rowEnd": 1 };
             const currentRow = {"data": this.props.data, "rowStart": item[2], "rowEnd": item[2]+1 };
 
@@ -131,6 +163,10 @@ class MapProcessPage extends Component {
         this.setState({ newColumn: newColumn });
         this.setState({ dataInNeedOfProcessing: wordFrom });
     }
+
+
+    //---------------- FUNCTIONS USED TO CREATE FINAL TABLE ------------------------
+
 
     createTable(array1,array2){
         let combinedArray = [];
@@ -167,6 +203,8 @@ class MapProcessPage extends Component {
         }
 
 
+    //----------------------------- RENDER ------------------------------
+
     render(){
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
@@ -178,6 +216,12 @@ class MapProcessPage extends Component {
                 </div>);
     }
 }
+
+//---------------------------------------------------------------------------------------
+
+//---                           TAXONOMY MAPPING FUNCTION                       ---------
+
+//---------------------------------------------------------------------------------------
 
 
 let tax = {

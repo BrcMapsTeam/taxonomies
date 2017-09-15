@@ -18,7 +18,7 @@ class App extends Component {
         this.state = {
             step: 1,
             value: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966&force=on",
-            data: <tr><td className="waiting">Loading...</td></tr>,
+            data: <tr><td className="waiting">Loading<span className="loading-animation">...</span></td></tr>,
             crisisTag: "#crisis+name",
             crisisColumnJson: "",
             mapFrom: "Glide",
