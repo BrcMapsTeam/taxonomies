@@ -82,7 +82,7 @@ class SelectColumnPage extends Component {
 /*--------------------------------------------------------------------------------*/
 
 
-    class DataTable extends Component {
+class DataTable extends Component {
 
         constructor(props){
             super(props);
@@ -138,6 +138,14 @@ class SelectColumnPage extends Component {
             );
     }
 }
+
+
+
+/*--------------------------------------------------------------------------------*/
+
+/*                           TABLE ROWS                                            */
+
+/*--------------------------------------------------------------------------------*/
 
 
 // Parameter Object should contain: data, start and end of rows, and className to be processed

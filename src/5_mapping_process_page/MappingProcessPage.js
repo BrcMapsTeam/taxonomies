@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
 import '../App.css';
 import config_json from '../taxonomy_maps/config.js';
+import { TableRows } from '../4_select_taxonomy_to_page/SelectColumnPage';
 
 
 //---------------------------------------------------------------------------------------
@@ -155,7 +156,12 @@ class MapProcessPage extends Component {
                             This is a snapshot of the corresponding row:
                         </div>
                         <div className="flex-row">
-                            <table className="scrollable-table" ><tbody>{this.parseData(dataHeaders)}{this.parseData(currentRow)}</tbody></table>
+                            <table className="scrollable-table" >
+                                <tbody>
+                                    {this.parseData(dataHeaders)}
+                                    {this.parseData(currentRow)}
+                                </tbody>
+                            </table>
                         </div>
                 </div>);
         }, this);
