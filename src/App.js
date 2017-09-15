@@ -87,6 +87,7 @@ class App extends Component {
             this.setState({data:userData});
         }.bind(this), function(status) { //error detection....
             alert('Something went wrong.');
+            this.setState({data:null});
         });
     }
 
