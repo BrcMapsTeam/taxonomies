@@ -26,9 +26,8 @@ class SelectTaxonomyFromPage extends Component {
                         <div>Which taxonomy are you mapping <b>FROM</b>?</div>
                     </div>
                     <div className="flex-row">
-                        <ul className={"TaxButtons"}>
                             {taxButtons}
-                        </ul>
+
                     </div> 
                     <div className="flex-row">
                         <div>You have currently selected: <b>{this.props.mapFrom}</b></div>
@@ -52,12 +51,11 @@ class SelectTaxonomyFromPage extends Component {
 export class TaxButtonElement extends Component {
 
     render() {
-        var colorOn = '#2997db';
-        var colorOff = '#bdb6b0';
-        var bgColor = (this.props.selectedBtn === this.props.text) ? colorOn: colorOff;
-        //console.log("in TaxButtonElement: ", this.props.selectedBtn, this.props.text, this);
+
+        let bgColor = (this.props.selectedBtn === this.props.text) ? 'colorOn': 'colorOff';
+        let classNames = 'TaxButton' + ' ' + bgColor;
         return (
-            <button className={'TaxButton'} id={this.props.text} style={{backgroundColor: bgColor}} onClick={this.props.handleMapChange}>{this.props.text}</button>
+            <div className={classNames} id={this.props.text} onClick={this.props.handleMapChange}>{this.props.text}</div>
         );
     }
 };

@@ -27,9 +27,7 @@ class SelectTaxonomyToPage extends Component {
                         <div>Which taxonomy are you mapping <b>TO</b>?</div>
                     </div>
                     <div className="flex-row">
-                        <ul className={"TaxButtons"}>
                             {taxButtons}
-                        </ul>
                     </div> 
                     <div className="flex-row">
                         <div>You have currently selected: <b>{this.props.mapTo}</b></div>

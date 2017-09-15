@@ -82,52 +82,16 @@ class SelectColumnPage extends Component {
 /*--------------------------------------------------------------------------------*/
 
 
-class DataTable extends Component {
+    class DataTable extends Component {
 
-    constructor(props){
-        super(props);
-        this.state =  {data: this.props.data};
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.setState({data:nextProps.data});
-    }
-
-
-    // Object should contain: data, start and end of rows to be processed, th/td/other tags
-    // e.g.: parseData({data:data, rowStart:0, rowEnd:10})
-
-    parseData(obj){
-        obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //Taking top 7 lines
-
-        let finalTable =
-        obj.data.map( function(row, i){
-            const temp = row.map(function(item, i){ 
-                return <td key={i}>{item}</td>
-            });
-            return <tr key={i}>{temp}</tr>;
+        constructor(props){
+            super(props);
+            this.state =  {data: this.props.data};
         }
-        );
-        return finalTable;
-    }
 
-
-    // ---- Parsing the clickable cells containing #HXL tags
-
-    parseTag(obj){
-
-        obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //Taking top 7 lines
-        let finalTable =
-        obj.data.map( function(row, i){
-            const temp = row.map(function(item, i){ 
-                return <td key={i} id={item} className="clickable-cell" onClick={this.props.handleTagChange} >{item}</td>
-            }, this //binds this inside of anonymous function
-            );
-            return <tr key={i}>{temp}</tr>;
-        }, this //binds this inside of anonymous function
-        );
-        return finalTable;
-    }
+        componentWillReceiveProps(nextProps){
+            this.setState({data:nextProps.data});
+        }
 
 
     render(){
@@ -138,26 +102,29 @@ class DataTable extends Component {
 
         //Checks that this.state.data is not "<tr>Loading</tr>"
         if (userData.type !== "tr" && Object.keys(userData).length !== 0) {
-
+            console.log(userData);
             const headerParameters = {
                 'data': userData,
                 'rowStart': 0,
-                'rowEnd': 1
+                'rowEnd': 1,
+                'className': ""
             };
             const tagParameters = {
                 'data': userData,
                 'rowStart': 1,
-                'rowEnd': 2
+                'rowEnd': 2,
+                'className': "clickable-cell"
             };
             const dataParameters = {
                 'data': userData,
                 'rowStart': 2,
-                'rowEnd': 6
+                'rowEnd': 6,
+                'className': ""
             };
 
-            userData = this.parseData(headerParameters);
-            userData2 = this.parseTag(tagParameters);
-            userData3 = this.parseData(dataParameters);
+            userData = <TableRows parameters={headerParameters} handleTagChange={function(){return;}} />
+            userData2 = <TableRows parameters={tagParameters} handleTagChange={this.props.handleTagChange} />;
+            userData3 = <TableRows parameters={dataParameters} handleTagChange={function(){return;}} />
         } //end if
 
         return(
@@ -171,6 +138,30 @@ class DataTable extends Component {
             );
     }
 }
+
+
+// Parameter Object should contain: data, start and end of rows, and className to be processed
+// e.g.: parseData({data:data, rowStart:0, rowEnd:10, className: "clickable-button"})
+
+export class TableRows extends Component {
+       
+    render(){
+        let obj = this.props.parameters;
+        obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //selecting data from lines
+
+        let finalTable =
+        obj.data.map( function(row, i){
+
+            const temp = row.map(function(item, j){ 
+                return (<td key={j} id={item} className={obj.className} onClick={this.props.handleTagChange} >{item}</td>);
+                }, this);
+                return (<tr key={i}>{temp}</tr>);
+
+            }, this)[0];  //Need the 0....
+
+            return (finalTable);
+        }
+    }
 
 
 export default SelectColumnPage;

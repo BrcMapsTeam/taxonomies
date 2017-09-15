@@ -1,4 +1,4 @@
-/*-----------colours----------*/
+﻿/*-----------colours----------*/
 /*-----------mix-ins----------*/
 .button {
   border-radius: 4px;
@@ -111,12 +111,25 @@ a {
   padding: 2em 2.5em 2em 2.5em;
   margin: 2em 1em 5em 1em;
   color: #ffffff;
+  border-bottom: #b1a9a2 1px solid;
   border-radius: 4px;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
   cursor: pointer;
   max-width: 30%;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
+}
+.colorOn {
+  background-color: #2997db;
+}
+.colorOn:hover {
+  background-color: #1a6b9d;
+}
+.colorOff {
+  background-color: #bdb6b0;
+}
+.colorOff:hover {
+  background-color: #9a8f86;
 }
 /*-------------------- FORM STYLING ---------*/
 input {
