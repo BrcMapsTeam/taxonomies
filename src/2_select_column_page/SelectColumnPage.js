@@ -25,7 +25,7 @@ class SelectColumnPage extends Component {
 
         if (nextProps.data !== this.props.data && nextProps.data !== null) {
             this.setState({buttonReady: 'yes'});
-        } else {
+        } if (nextProps.data === null) {
             this.setState({buttonReady: 'no'});
         }
     }
@@ -33,7 +33,9 @@ class SelectColumnPage extends Component {
     //If user goes from next page back to this page and data is already loaded, un-grey the button
     componentDidMount(){
         const data = this.props.data;
+
         if (data !== null && data.type !== "tr" && Object.keys(data).length !== 0) {
+            console.log("yes ", data);
             this.setState({buttonReady: 'yes'});
         }
     }
@@ -47,12 +49,17 @@ class SelectColumnPage extends Component {
         }
     }
 
-    tableLoading(){
-        if (this.state.buttonReady !== 'yes' && this.props.data !== null) {
-            return(this.props.data);
-        } if (this.props.data === null) {
-            return(<div className="waiting">No data found, please check your link is a JSON file.</div>);
-        } else {
+tableLoading(){
+    console.log(this.props.data);
+
+            if (this.state.buttonReady !== 'yes' && this.props.data === null) {
+                return(<div className="waiting">No data found, please check your link is a JSON file.</div>);
+            } 
+            if (this.state.buttonReady !== 'yes' && this.props.data.type === "tr" ) {
+                console.log("wiiiin");
+                return(this.props.data);
+            } 
+            else {
             return (<div className="flex-row">
                     <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange} crisisTag={this.props.crisisTag}/>
                     </div>);
