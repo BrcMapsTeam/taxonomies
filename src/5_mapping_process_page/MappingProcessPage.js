@@ -158,8 +158,8 @@ class MapProcessPage extends Component {
                         <div className="flex-row">
                             <table className="scrollable-table" >
                                 <tbody>
-                                    {this.parseData(dataHeaders)}
-                                    {this.parseData(currentRow)}
+                                    < TableRows parameters={dataHeaders} />
+                                    < TableRows parameters={currentRow} />
                                 </tbody>
                             </table>
                         </div>
@@ -193,20 +193,6 @@ class MapProcessPage extends Component {
         return finalTable;
         }
 
-
-       parseData(obj){
-            obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); 
-
-            let finalTable =
-            obj.data.map( function(row, i){
-                const temp = row.map(function(item, i){ 
-                    return <td key={i}>{item}</td>
-                });
-                return <tr key={i}>{temp}</tr>;
-            }
-            );
-            return finalTable;
-        }
 
 
     //----------------------------- RENDER ------------------------------

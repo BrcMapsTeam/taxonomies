@@ -53,7 +53,7 @@ export class TaxButtonElement extends Component {
     render() {
 
         let bgColor = (this.props.selectedBtn === this.props.text) ? 'colorOn': 'colorOff';
-        let classNames = 'TaxButton' + ' ' + bgColor;
+        let classNames = 'TaxButton ' + bgColor;
         return (
             <div className={classNames} id={this.props.text} onClick={this.props.handleMapChange}>{this.props.text}</div>
         );
