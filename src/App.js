@@ -88,7 +88,8 @@ class App extends Component {
         }.bind(this), function(status) { //error detection....
             alert('Something went wrong.');
             this.setState({data:null});
-        }.bind(this);
+        }.bind(this)
+    );
     }
 
 
