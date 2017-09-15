@@ -22,6 +22,15 @@
   background-color: #0c9dbc;
   color: white;
 }
+.clickable-cell {
+  border-bottom: #b1a9a2 1px solid;
+  border-radius: 4px;
+  box-shadow: 0px 3px 5px 0px #b0b8bd;
+  cursor: pointer;
+  max-width: 30%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
 .clickable-cell:hover {
   background-color: #b0b8bd;
 }
@@ -177,14 +186,3 @@ input {
 .waiting {
   color: #98192a;
 }
-/*@keyframes hoverTransition {
-    0% {
-        transform: ;
-    }
-    50% {
-
-    }
-    100% {
-
-    }
-}*/

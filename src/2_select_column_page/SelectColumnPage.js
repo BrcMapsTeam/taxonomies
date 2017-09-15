@@ -50,7 +50,7 @@ class SelectColumnPage extends Component {
             return(this.props.data);
         } else {
             return (<div className="flex-row">
-                    <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange}/>
+                    <DataTable data={this.props.data} handleTagChange={this.props.handleTagChange} crisisTag={this.props.crisisTag}/>
                     </div>);
         }
     }
@@ -99,10 +99,13 @@ class DataTable extends Component {
         let userData = this.state.data;
         let userData2 = "";
         let userData3 = "";
+        let userData4 = "";
+        let userData5 = "";
 
         //Checks that this.state.data is not "<tr>Loading</tr>"
         if (userData.type !== "tr" && Object.keys(userData).length !== 0) {
-            console.log(userData);
+
+
             const headerParameters = {
                 'data': userData,
                 'rowStart': 0,
@@ -113,18 +116,32 @@ class DataTable extends Component {
                 'data': userData,
                 'rowStart': 1,
                 'rowEnd': 2,
-                'className': "clickable-cell"
+                'className': 'clickable-cell'
             };
-            const dataParameters = {
+            const dataParameters3 = {
                 'data': userData,
                 'rowStart': 2,
-                'rowEnd': 6,
+                'rowEnd': 3,
+                'className': ""
+            };
+            const dataParameters4 = {
+                'data': userData,
+                'rowStart': 3,
+                'rowEnd': 4,
+                'className': ""
+            };
+            const dataParameters5 = {
+                'data': userData,
+                'rowStart': 4,
+                'rowEnd': 5,
                 'className': ""
             };
 
-            userData = <TableRows parameters={headerParameters} handleTagChange={function(){return;}} />
-            userData2 = <TableRows parameters={tagParameters} handleTagChange={this.props.handleTagChange} />;
-            userData3 = <TableRows parameters={dataParameters} handleTagChange={function(){return;}} />
+            userData = <TableRows parameters={headerParameters} handleTagChange={function(){return;}} />;
+            userData2 = <TableRows parameters={tagParameters} handleTagChange={this.props.handleTagChange} crisisTag={this.props.crisisTag} />;
+            userData3 = <TableRows parameters={dataParameters3} handleTagChange={function(){return;}} />;
+            userData4 = <TableRows parameters={dataParameters4} handleTagChange={function(){return;}} />;
+            userData5 = <TableRows parameters={dataParameters5} handleTagChange={function(){return;}} />;
         } //end if
 
         return(
@@ -133,6 +150,8 @@ class DataTable extends Component {
                     {userData}
                     {userData2}
                     {userData3}
+                    {userData4}
+                    {userData5}
                 </tbody>
             </table>
             );
@@ -154,19 +173,27 @@ class DataTable extends Component {
 export class TableRows extends Component {
        
     render(){
+
         let obj = this.props.parameters;
         obj.data = obj.data.slice(obj.rowStart, obj.rowEnd); //selecting data from lines
 
         let finalTable =
         obj.data.map( function(row, i){
-
+            let colourClassName;
             const temp = row.map(function(item, j){ 
-                return (<td key={j} id={item} className={obj.className} onClick={this.props.handleTagChange} >{item}</td>);
-                }, this);
-                return (<tr key={i}>{temp}</tr>);
+
+                //Colour management
+                if (this.props.crisisTag !== null && this.props.crisisTag !== undefined) {
+                    let bgColor = (this.props.crisisTag === item) ? 'colorOn': 'colorOff';
+                    colourClassName = obj.className +' '+ bgColor;
+                }
+                return (<td key={j} id={item} className={colourClassName || obj.className} onClick={this.props.handleTagChange} >{item}</td>);
+            
+            }, this);
+            return (<tr key={i}>{temp}</tr>);
 
             }, this)[0];  //Need the 0....
-
+            console.log(finalTable);
             return (finalTable);
         }
     }
