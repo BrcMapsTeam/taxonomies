@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
 import '../App.css';
 import config_json from '../taxonomy_maps/config.js';
-import { TableRows } from '../4_select_taxonomy_to_page/SelectColumnPage';
+import { TableRows } from '../2_select_column_page/SelectColumnPage';
 
 
 //---------------------------------------------------------------------------------------
