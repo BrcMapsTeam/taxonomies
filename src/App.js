@@ -50,11 +50,15 @@ class App extends Component {
     }
 
     handleMapFromChange(event) {
-        this.setState({mapFrom: event.target.mapFrom});
+        this.setState({mapFrom: event.target.id}, function() {
+            console.log(this.state.mapFrom);
+        });
     }
 
     handleMapToChange(event) {
-        this.setState({mapTo: event.target.mapTo});
+        this.setState({mapTo: event.target.id}, function() {
+            console.log(this.state.mapTo);
+        });
     }
 
     //ajax request to get json data
@@ -130,21 +134,6 @@ class App extends Component {
     }
 
 
-    // function for selecting taxonomy FROM
-    selectMapFrom() {
-        this.setState({
-            mapFrom : this.state.mapFrom
-        })
-    }
-
-    // function for selecting taxonomy TO
-    selectMapTo() {
-        this.setState({
-            mapTo : this.state.mapTo
-        })
-    }
-
-
     //----------------- function to show content of page -----------------
 
     showStep() {
@@ -174,8 +163,8 @@ class App extends Component {
             case 3:
                 return (<SelectTaxonomyFromPage 
                             previousStep={() => this.previousStep}
-                            handleTaxFromChange = {this.handleTaxFromChange}
-                            taxFromTag = {this.state.taxFromTag}
+                            handleMapFromChange = {this.handleMapFromChange}
+                            mapFrom = {this.state.mapFrom}
                             nextStep={() => this.nextStep}
                         />);
 
@@ -183,8 +172,8 @@ class App extends Component {
             case 4:
                 return (<SelectTaxonomyToPage 
                             previousStep={() => this.previousStep}
-                            handleTaxToChange = {this.handleTaxToChange}
-                            taxToTag = {this.state.taxToTag}
+                            handleMapToChange = {this.handleMapToChange}
+                            mapTo = {this.state.mapTo}
                             nextStep={() => this.nextStep}
                         />);
 

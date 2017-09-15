@@ -4,49 +4,19 @@ import '../App.css';
 import config_json from '../taxonomy_maps/config.js';
 
 
-export class TaxButtonElement extends Component {
+/*--------------------------------------------------------------------------------*/
 
-    constructor(props){
-        super(props);
-        this.state = {selected: false};
-        this.handleClick = this.handleClick.bind(this);
-    }
+/*                         SELECT TAXONOMY FROM PAGE                              */
 
-    handleClick(e) {
-        this.setState({selected: !this.state.selected});
-        this.props.onClick(this.props.text);
-        //console.log("in handleClick ", this.props.text, this);
-    }
-
-    render() {
-        //console.log("in TaxButtonElement: ", this);
-        var onOff = this.state.selected ? 'on': 'off';
-        return (
-            <button className={onOff} onClick={this.handleClick}>{this.props.text}</button>
-        );
-    }
-};
-
-
+/*--------------------------------------------------------------------------------*/
 
 class SelectTaxonomyFromPage extends Component {
-
-    constructor(props){
-        super(props);
-        this.state = {tax: 'IFRC-default'};
-        this.clickTax = this.clickTax.bind(this);
-    }
-
-    clickTax(newTax) {
-        //console.log("in clickTax: ", newTax);
-        this.setState({tax: newTax });
-    }
 
     render(){
 
         const taxButtons = config_json.map((tax, i) => {
-            //console.log("taxButtons: ", i, tax.name);
-            return <TaxButtonElement key={i} text={tax.name} onClick={this.clickTax} />
+            //console.log("taxButtons: ", i, tax.name, this.props);
+            return <TaxButtonElement key={i} selectedBtn={this.props.mapFrom} text={tax.name} handleMapChange={this.props.handleMapFromChange} />
         });
 
         return (
@@ -61,7 +31,7 @@ class SelectTaxonomyFromPage extends Component {
                         </ul>
                     </div> 
                     <div className="flex-row">
-                        <div>You have currently selected: <b>{this.state.tax}</b></div>
+                        <div>You have currently selected: <b>{this.props.mapFrom}</b></div>
                     </div>
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
@@ -72,5 +42,24 @@ class SelectTaxonomyFromPage extends Component {
     }
 }
 
+
+/*--------------------------------------------------------------------------------*/
+
+/*                         TAXONOMY BUTTON ELEMENT                                */
+
+/*--------------------------------------------------------------------------------*/
+
+export class TaxButtonElement extends Component {
+
+    render() {
+        var colorOn = '#2997db';
+        var colorOff = '#bdb6b0';
+        var bgColor = (this.props.selectedBtn === this.props.text) ? colorOn: colorOff;
+        //console.log("in TaxButtonElement: ", this.props.selectedBtn, this.props.text, this);
+        return (
+            <button className={'TaxButton'} id={this.props.text} style={{backgroundColor: bgColor}} onClick={this.props.handleMapChange}>{this.props.text}</button>
+        );
+    }
+};
 
 export default SelectTaxonomyFromPage;

@@ -1,4 +1,4 @@
-﻿/*-----------colours----------*/
+/*-----------colours----------*/
 /*-----------mix-ins----------*/
 .button {
   border-radius: 4px;
@@ -99,6 +99,18 @@ a {
   margin: 2em 1em 5em 1em;
   color: #f1f1f1;
   background-color: #bdb6b0;
+  border-radius: 4px;
+  box-shadow: 0px 3px 5px 0px #b0b8bd;
+  cursor: pointer;
+  max-width: 30%;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+/*-------------------- TAXONOMY BUTTONS ---------*/
+.TaxButton {
+  padding: 2em 2.5em 2em 2.5em;
+  margin: 2em 1em 5em 1em;
+  color: #ffffff;
   border-radius: 4px;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
   cursor: pointer;
