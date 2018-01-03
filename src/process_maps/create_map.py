@@ -1,33 +1,70 @@
+# Note: Script will replace existing taxonomy maps
+
 import urllib, json
 
-taxonomies = [
-{"name":"IFRC1_base","url":"https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1068706296"},
-{"name":"IFRC2_base","url":"https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=20836606"},
-{"name":"IFRC3_base","url":"https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=491036723"},
-{"name":"IFRC4_base","url":"https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1487516888"},
-{"name":"Glide_base","url":"https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1971172407"}
-]
+listOfTaxonomies = "https://docs.google.com/spreadsheets/d/1_EKu8sGBryuZY9smHMemrRuZ6EvvqoTxsW_tbkS9f74/edit#gid=0";
+
+def createHXLLink(url):
+    return "https://proxy.hxlstandard.org/data.json?strip-headers=on&url=" + urllib.quote(url)
+
+
+response = urllib.urlopen(createHXLLink(listOfTaxonomies))
+data = json.loads(response.read())
+taxonomies = []
+index = 0
+                          
+for row in data:
+    
+    # Removes scenario when there is no URL provided
+    if index > 0 and len(row[5])>2:
+        name = row[3]+"_"+row[2]+row[1]
+        urlOnline = row[5]
+        taxonomies.append({"name": name, "urlOnline": urlOnline})
+    index += 1
+                          
 
 for taxonomy in taxonomies:
-	print taxonomy['name']
-	hxlProxyURL = "https://proxy.hxlstandard.org/data.json?strip-headers=on&url="+urllib.quote(taxonomy['url'])
+    
+    print "Processing taxonomy: ", taxonomy['name']
 
-	response = urllib.urlopen(hxlProxyURL)
-	data = json.loads(response.read())
-	i = 0
-	output = {}
+    taxonomy['url'] = 'taxonomy_maps/'+taxonomy['name']+'_base.json'
+    hxlProxyURL = createHXLLink(taxonomy['urlOnline'])
 
-	for row in data:
+    try:
+        response = urllib.urlopen(hxlProxyURL)
+        data = json.loads(response.read())
+        i = 0
+        output = {}
 
-		subTerm = row[1]
-		baseTerm = row[2]
+        for row in data:
+            subTerm = row[1]
+            baseTerm = row[2]
 
-		if i>0:
-			if subTerm not in output:
-				output[subTerm] = [baseTerm]
-			else:
-				output[subTerm].append(baseTerm)
-		i=i+1
+            if i>0:
+                if subTerm not in output:
+                    output[subTerm] = [baseTerm]
+                else:
+                    output[subTerm].append(baseTerm)
+            i=i+1
 
-	with open('../taxonomy_maps/'+taxonomy['name']+'.json', 'w') as outfile:
-		json.dump(output, outfile)
+        with open('../'+taxonomy['url'], 'w') as outfile:
+            json.dump(output, outfile)
+    except Exception as error:
+        print "Error processing the taxonomy: ", taxonomy['name']
+        print error
+            
+            
+# Creating/Updating the config.js file
+
+
+with open('../taxonomy_maps/config.js', 'w') as file:
+    file.write("let config_json = \n")
+    
+with open('../taxonomy_maps/config.js', 'a') as file:
+    json.dump(taxonomies, file)
+    file.write(";\nexport default config_json;")
+
+
+    
+    
+    
