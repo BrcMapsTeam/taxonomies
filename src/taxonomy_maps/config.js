@@ -1,24 +1,3 @@
-let config_json =  [
-	{
-		"name":"IFRC level 1",
-		"url":"taxonomy_maps/IFRC1_base.json"
-	},
-		{
-		"name":"IFRC level 2",
-		"url":"taxonomy_maps/IFRC2_base.json"
-	},
-		{
-		"name":"IFRC level 3",
-		"url":"taxonomy_maps/IFRC3_base.json"
-	},
-		{
-		"name":"IFRC level 4",
-		"url":"taxonomy_maps/IFRC4_base.json"
-	},
-		{
-		"name":"Glide",
-		"url":"taxonomy_maps/Glide_base.json"
-	}
-];
-
+let config_json = 
+[{"url": "taxonomy_maps/disaster_IFRC1_base.json", "urlOnline": "https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1143895699", "name": "disaster_IFRC1"}, {"url": "taxonomy_maps/disaster_IFRC2_base.json", "urlOnline": "https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=125202705", "name": "disaster_IFRC2"}, {"url": "taxonomy_maps/disaster_IFRC3_base.json", "urlOnline": "https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1879432315", "name": "disaster_IFRC3"}, {"url": "taxonomy_maps/disaster_IFRC4_base.json", "urlOnline": "https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1487516888", "name": "disaster_IFRC4"}, {"url": "taxonomy_maps/disaster_GLIDE1_base.json", "urlOnline": "https://docs.google.com/spreadsheets/d/1ulGIFJIdwkOcBo2eAaQZ9-35mHY7XE0hrDufnMbL2fA/edit#gid=1971172407", "name": "disaster_GLIDE1"}];
 export default config_json;
