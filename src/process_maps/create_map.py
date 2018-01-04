@@ -21,9 +21,9 @@ for row in data:
 		taxGroup = row[2]
 		taxLevel = row[1]
 		urlOnline = row[5]
-        name = taxType + "_" + taxGroup + taxLevel
+		name = taxType + "_" + taxGroup + taxLevel
 
-        taxonomies.append({"name": name, "urlOnline": urlOnline, "type": taxType, "group": taxGroup, "level":taxLevel })
+		taxonomies.append({"name": name, "urlOnline": urlOnline, "type": taxType, "group": taxGroup, "level":taxLevel })
     index += 1
                           
 
