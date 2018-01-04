@@ -21,8 +21,8 @@ class App extends Component {
             data: <tr><td className="waiting">Loading<span className="loading-animation">...</span></td></tr>,
             crisisTag: "#crisis+name",
             crisisColumnJson: "",
-            mapFrom: "Glide",
-            mapTo: "IFRC level 4"
+            mapFrom: "disaster_GLIDE1",
+            mapTo: "disaster_IFRC4"
         };
 
         //List of all functions in the App Class using "this"
