@@ -17,9 +17,13 @@ for row in data:
     
     # Removes scenario when there is no URL provided
     if index > 0 and len(row[5])>2:
-        name = row[3]+"_"+row[2]+row[1]
-        urlOnline = row[5]
-        taxonomies.append({"name": name, "urlOnline": urlOnline})
+		taxType = row[3]
+		taxGroup = row[2]
+		taxLevel = row[1]
+		urlOnline = row[5]
+        name = taxType + "_" + taxGroup + taxLevel
+
+        taxonomies.append({"name": name, "urlOnline": urlOnline, "type": taxType, "group": taxGroup, "level":taxLevel })
     index += 1
                           
 

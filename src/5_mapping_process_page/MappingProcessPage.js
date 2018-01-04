@@ -179,7 +179,6 @@ class MapProcessPage extends Component {
         array1.forEach(function(c, i){
             combinedArray.push([c,array2[i]]);
         });
-        console.log(combinedArray);
 
         let finalTable =
         combinedArray.map( function(item, i){
@@ -263,6 +262,7 @@ let tax = {
 
             let tax1Call = this._loadTaxonomy(this._tax1.url);
             let tax2Call = this._loadTaxonomy(this._tax2.url);
+			console.log(this._tax1.type);
 
             let map = parent._createMap(tax1Call,tax2Call);
             return map;

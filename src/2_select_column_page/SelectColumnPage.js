@@ -35,7 +35,6 @@ class SelectColumnPage extends Component {
         const data = this.props.data;
 
         if (data !== null && data.type !== "tr" && Object.keys(data).length !== 0) {
-            console.log("yes ", data);
             this.setState({buttonReady: 'yes'});
         }
     }
@@ -50,13 +49,11 @@ class SelectColumnPage extends Component {
     }
 
 tableLoading(){
-    console.log(this.props.data);
 
             if (this.state.buttonReady !== 'yes' && this.props.data === null) {
                 return(<div className="waiting">No data found, please check your link is a JSON file.</div>);
             } 
             if (this.state.buttonReady !== 'yes' && this.props.data.type === "tr" ) {
-                console.log("wiiiin");
                 return(this.props.data);
             } 
             else {
@@ -112,7 +109,7 @@ class DataTable extends Component {
         let userData3 = "";
         let userData4 = "";
         let userData5 = "";
-        console.log(userData);
+
         //Checks that this.state.data is not "<tr>Loading</tr>"
         if (userData !== null && userData.type !== "tr" && Object.keys(userData).length !== 0) {
 
@@ -204,7 +201,7 @@ export class TableRows extends Component {
             return (<tr key={i}>{temp}</tr>);
 
             }, this)[0];  //Need the 0....
-            console.log(finalTable);
+
             return (finalTable);
         }
     }
