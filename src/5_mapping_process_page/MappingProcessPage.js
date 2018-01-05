@@ -23,6 +23,7 @@ class MapProcessPage extends Component {
             currentWordFrom: '',
             currentArrayTo: [],
             newColumn: [],
+			taxonomyLevelOfTerm: [],
             dataInNeedOfProcessing: [],
             step: 0
         };
@@ -88,7 +89,7 @@ class MapProcessPage extends Component {
                         <div className="flex-row">
                             <table className="scrollable-table">
                                 <tbody>
-                                    {this.createTable(this.props.crisisColumnJson, this.state.newColumn)}
+                                    {this.createTable(this.combineArrays(this.props.crisisColumnJson, this.state.newColumn, this.state.taxonomyLevelOfTerm))}
                                 </tbody>
                             </table>
                         </div>
@@ -113,8 +114,10 @@ class MapProcessPage extends Component {
     processData(){
         const column = this.props.crisisColumnJson;
         let newColumn = [];
+		let taxonomyLevelOfTerm = [];
         let dataInNeedOfProcessing = [];
         let wordFrom;
+		let taxonomyLevel = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
 
         //Creating taxonomy map
         tax.config(config_json);
@@ -127,6 +130,7 @@ class MapProcessPage extends Component {
                         dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
                     } else { //if length not > 1 add to array of translated taxonomies
                         newColumn[i] = taxonomyMap[c][0] || " ";
+						taxonomyLevelOfTerm[i] = taxonomyLevel;
                     }
                 } else { //if it's undefined add empty cell
                     newColumn[i] = " ";
@@ -134,6 +138,7 @@ class MapProcessPage extends Component {
             }
         }); // end for Each
 
+		//While the dataInNeedOfProcessing is not empty, keep processing
         if (dataInNeedOfProcessing.length === 0){
             this.setState({ finishedProcessing: 'yes'});
         } else {
@@ -168,29 +173,50 @@ class MapProcessPage extends Component {
         };
         this.setState({ newColumn: newColumn });
         this.setState({ dataInNeedOfProcessing: wordFrom });
+		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
     }
 
 
     //---------------- FUNCTIONS USED TO CREATE FINAL TABLE ------------------------
 
+	// Merges the arrays for the data-to-be-converted, new converted data, 
+	// and the which-level-of-taxonomy-the-converted-data-is-from into one array
+	// to be used to create the final Table using the function createTable below
 
-    createTable(array1,array2){
-        let combinedArray = [];
-        array1.forEach(function(c, i){
-            combinedArray.push([c,array2[i]]);
-        });
+	combineArrays(array1, array2, array3){
+		let combinedArray = [];
+		array1.forEach(function(c, i){
+			if(i===0){
+				array2[i] = "Converted Term";
+				array3[i] = "From Taxonomy";
+			}
+			if(i===1){
+				array2[i] = "#Crisis+Type";
+				array3[i] = "#Level";
+			}
+			combinedArray.push([c,array2[i], array3[i]]);
+		});
+		return combinedArray;
+	}
 
-        let finalTable =
-        combinedArray.map( function(item, i){
-            return (<tr key={i}>
-                            <td>{item[0]}</td>
-                            <td>{item[1]}</td>
-                            </tr>);
-        }
-        );
 
+	// Creates a table from the combined array produced above, 
+	// Function works with any number of columns and will put each row into a <tr>
+	// And each element of the array in the row into a <td>
+
+    createTable(array){
+        let finalTable = 
+			array.map( function(item, j){
+				return (<tr key={j}>
+								{item.map(
+									function(cell, i){ 
+										return <td key={i}>{cell}</td>
+									}
+								)}
+						</tr>);
+			});
         return finalTable;
-        }
+     }
 
 
 
@@ -262,7 +288,7 @@ let tax = {
 
             let tax1Call = this._loadTaxonomy(this._tax1.url);
             let tax2Call = this._loadTaxonomy(this._tax2.url);
-			console.log(this._tax1.type);
+			console.log(this._tax1.group);
 
             let map = parent._createMap(tax1Call,tax2Call);
             return map;
