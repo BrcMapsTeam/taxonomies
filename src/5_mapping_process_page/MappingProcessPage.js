@@ -46,11 +46,18 @@ class MapProcessPage extends Component {
 
     nextWordHandler(event){
         const index = event.target.id.match(/\d+/g);
-        const word = event.target.id.match(/[a-zA-Z]+/g);
+        let wordArray = event.target.id.match(/[a-zA-Z]+/g);
+		let word;
+		wordArray.forEach(function(item,i){
+			if (i===0){
+				word = item;
+			} else {
+				word = word.concat(" "+item);
+			}
+		})
 
         let tempArray = this.state.newColumn.slice();
         tempArray[index] = word;
-
         this.setState({newColumn: tempArray});
 
         if(this.state.step === this.state.dataInNeedOfProcessing.length-1){
@@ -89,7 +96,7 @@ class MapProcessPage extends Component {
                         <div className="flex-row">
                             <table className="scrollable-table">
                                 <tbody>
-                                    {this.createTable(this.combineArrays(this.props.crisisColumnJson, this.state.newColumn, this.state.taxonomyLevelOfTerm))}
+                                    {this.createTable(this.combineArrays(this.props.data, this.state.newColumn, this.state.taxonomyLevelOfTerm))}
                                 </tbody>
                             </table>
                         </div>
@@ -180,21 +187,21 @@ class MapProcessPage extends Component {
     //---------------- FUNCTIONS USED TO CREATE FINAL TABLE ------------------------
 
 	// Merges the arrays for the data-to-be-converted, new converted data, 
-	// and the which-level-of-taxonomy-the-converted-data-is-from into one array
+	// and the level-of-taxonomy-the-converted-data-is-from into one array
 	// to be used to create the final Table using the function createTable below
 
-	combineArrays(array1, array2, array3){
-		let combinedArray = [];
-		array1.forEach(function(c, i){
+	combineArrays(data, array2, array3){
+		let combinedArray = [];	
+		data.forEach(function(c, i){
 			if(i===0){
 				array2[i] = "Converted Term";
 				array3[i] = "From Taxonomy";
 			}
 			if(i===1){
-				array2[i] = "#Crisis+Type";
-				array3[i] = "#Level";
+				array2[i] = "#crisis+type";
+				array3[i] = "#level";
 			}
-			combinedArray.push([c,array2[i], array3[i]]);
+			combinedArray.push(c.concat(array2[i], array3[i]));
 		});
 		return combinedArray;
 	}

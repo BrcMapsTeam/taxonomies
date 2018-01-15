@@ -101,8 +101,13 @@ class App extends Component {
         let index = data[1].indexOf(crisisTag);
 
         data.forEach(function(c, i){
+			if(i===1){
+			//do nothing
+			column.push(c[index]);
+			} else {
             //to capital case
             column.push(c[index].replace(/\b\w/g, function(l){ return l.toUpperCase() }));
+			}
         });
 
         this.setState({crisisColumnJson: column});
