@@ -48,6 +48,10 @@ class MapProcessPage extends Component {
         const index = event.target.id.match(/\d+/g);
         let wordArray = event.target.id.match(/[a-zA-Z]+/g);
 		let word;
+		let taxonomyLevelOfTerm = this.state.taxonomyLevelOfTerm.slice();
+		let tempArray = this.state.newColumn.slice();
+		const taxonomyLevel = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
+
 		wordArray.forEach(function(item,i){
 			if (i===0){
 				word = item;
@@ -56,9 +60,11 @@ class MapProcessPage extends Component {
 			}
 		})
 
-        let tempArray = this.state.newColumn.slice();
         tempArray[index] = word;
+		taxonomyLevelOfTerm[index] = taxonomyLevel;
+
         this.setState({newColumn: tempArray});
+		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
 
         if(this.state.step === this.state.dataInNeedOfProcessing.length-1){
             this.setState({finishedProcessing: 'yes'});
