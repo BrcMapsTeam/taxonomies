@@ -43,6 +43,7 @@ class MapProcessPage extends Component {
     //--------------------- PROCESSING USER CHOICES ------------------------
     //-----------------------------------------------------------------------
 
+	//Decides what happens once a user selects one of the choices of words
 
     nextWordHandler(event){
         const index = event.target.id.match(/\d+/g);
@@ -123,38 +124,8 @@ class MapProcessPage extends Component {
     //---------------- GENERATING NEW DATA AND QUESTIONS TO USER ------------------------
     //----------------------------------------------------------------------------------
 
-
-    processData(){
-        const column = this.props.crisisColumnJson;
-        let newColumn = [];
-		let taxonomyLevelOfTerm = [];
-        let dataInNeedOfProcessing = [];
-        let wordFrom;
-		let taxonomyLevel = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
-
-        //Creating taxonomy map
-        tax.config(config_json);
-        let taxonomyMap = new tax.createMap(this.props.mapFrom, this.props.mapTo);
-
-        column.forEach(function(c, i){
-            if (i>1) {
-                if (taxonomyMap[c] !== undefined){
-                    if (taxonomyMap[c].length > 1){
-                        dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
-                    } else { //if length not > 1 add to array of translated taxonomies
-                        newColumn[i] = taxonomyMap[c][0] || " ";
-						taxonomyLevelOfTerm[i] = taxonomyLevel;
-                    }
-                } else { //if it's undefined add empty cell
-                    newColumn[i] = " ";
-                }
-            }
-        }); // end for Each
-
-		//While the dataInNeedOfProcessing is not empty, keep processing
-        if (dataInNeedOfProcessing.length === 0){
-            this.setState({ finishedProcessing: 'yes'});
-        } else {
+	askUserInput(dataInNeedOfProcessing){
+	    let wordFrom;
 
         wordFrom = dataInNeedOfProcessing.map(function(item, i){
             const listOfChoices = item[1].map(function(word, j){ 
@@ -183,11 +154,50 @@ class MapProcessPage extends Component {
                         </div>
                 </div>);
         }, this);
-        };
+		
+		this.setState({ dataInNeedOfProcessing: wordFrom });
+	}
+
+
+    processData(){
+        const column = this.props.crisisColumnJson;
+        let newColumn = [];
+		let taxonomyLevelOfTerm = [];
+        let dataInNeedOfProcessing = [];
+		let dataToCheckInHigherTaxonomy = [];
+		let taxonomyLevel = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
+
+        //Creating taxonomy map
+        tax.config(config_json);
+        let taxonomyMap = new tax.createMap(this.props.mapFrom, this.props.mapTo);
+
+        column.forEach(function(c, i){
+            if (i>1) {
+                if (taxonomyMap[c] !== undefined){
+                    if (taxonomyMap[c].length > 1){
+                        dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
+                    } else { //if length not > 1 add to array of translated taxonomies
+                        newColumn[i] = taxonomyMap[c][0] || " ";
+						taxonomyLevelOfTerm[i] = taxonomyLevel;
+                    }
+                } else { //if it's undefined add empty cell
+                    newColumn[i] = "AAA";
+					dataToCheckInHigherTaxonomy.push([c,i]);
+                }
+            }
+        }); // end for Each
+
+		//While the dataInNeedOfProcessing is not empty, keep processing
+		if (dataInNeedOfProcessing.length === 0){
+            this.setState({ finishedProcessing: 'yes'});
+        } else {
+			this.askUserInput(dataInNeedOfProcessing);
+		};
+		
         this.setState({ newColumn: newColumn });
-        this.setState({ dataInNeedOfProcessing: wordFrom });
 		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
-    }
+    }//End Process data
+
 
 
     //---------------- FUNCTIONS USED TO CREATE FINAL TABLE ------------------------
