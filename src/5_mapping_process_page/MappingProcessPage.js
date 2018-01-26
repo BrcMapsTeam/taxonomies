@@ -31,12 +31,19 @@ class MapProcessPage extends Component {
         this.nextWordHandler = this.nextWordHandler.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({data:nextProps.data});
-    }
 
     componentWillMount(){
-        this.processData();
+
+		//Changing the array into a key:value pair list
+		const data = this.props.crisisColumnJson;
+		let dataObject = {};
+
+		data.forEach(function(c,i){
+			dataObject[i] = c;
+		});
+
+		//Processing all data
+        this.processData(dataObject);
     }
 
     //-----------------------------------------------------------------------
@@ -158,34 +165,27 @@ class MapProcessPage extends Component {
 		this.setState({ dataInNeedOfProcessing: wordFrom });
 	}
 
-
-    processData(){
-        const column = this.props.crisisColumnJson;
-        let newColumn = [];
-		let taxonomyLevelOfTerm = [];
+	
+    processData(data){
+        const column = data;
         let dataInNeedOfProcessing = [];
+		let taxonomyLevel = this.props.mapTo.substr(this.props.mapTo.length-1);
 		let dataToCheckInHigherTaxonomy = [];
-		let taxonomyLevel = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
+		
+		let results = this.searchTermInTaxonomy(taxonomyLevel, column, dataInNeedOfProcessing);
+		dataInNeedOfProcessing = results[0];
+		dataToCheckInHigherTaxonomy = results[1];
+		taxonomyLevel--;
 
-        //Creating taxonomy map
-        tax.config(config_json);
-        let taxonomyMap = new tax.createMap(this.props.mapFrom, this.props.mapTo);
+		while(taxonomyLevel > 0){
+			if(dataToCheckInHigherTaxonomy.length!==0){
+				results = this.searchTermInTaxonomy(taxonomyLevel, dataToCheckInHigherTaxonomy, dataInNeedOfProcessing);
+				dataInNeedOfProcessing = results[0];
+				dataToCheckInHigherTaxonomy = results[1];
+			}
 
-        column.forEach(function(c, i){
-            if (i>1) {
-                if (taxonomyMap[c] !== undefined){
-                    if (taxonomyMap[c].length > 1){
-                        dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
-                    } else { //if length not > 1 add to array of translated taxonomies
-                        newColumn[i] = taxonomyMap[c][0] || " ";
-						taxonomyLevelOfTerm[i] = taxonomyLevel;
-                    }
-                } else { //if it's undefined add empty cell
-                    newColumn[i] = "AAA";
-					dataToCheckInHigherTaxonomy.push([c,i]);
-                }
-            }
-        }); // end for Each
+				taxonomyLevel--;
+		}
 
 		//While the dataInNeedOfProcessing is not empty, keep processing
 		if (dataInNeedOfProcessing.length === 0){
@@ -194,10 +194,42 @@ class MapProcessPage extends Component {
 			this.askUserInput(dataInNeedOfProcessing);
 		};
 		
-        this.setState({ newColumn: newColumn });
-		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
     }//End Process data
 
+
+	searchTermInTaxonomy(taxonomyLevel, data, dataInNeedOfProcessing){
+			let taxonomyLevelOfTerm = this.state.taxonomyLevelOfTerm;
+		    let newColumn = this.state.newColumn;
+			let dataToCheckInHigherTaxonomy = {};
+			let mapTo = this.props.mapTo.slice(0, -1) + taxonomyLevel;
+
+		    //Creating taxonomy map
+			tax.config(config_json);
+		    let taxonomyMap = new tax.createMap(this.props.mapFrom, mapTo);
+
+			//For each item to be translated
+			Object.keys(data).forEach(function(i){
+				if (i>1) {
+					let c = data[i];
+					if (taxonomyMap[c] !== undefined && taxonomyMap[c].length !==0){
+						if (taxonomyMap[c].length > 1){
+							dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
+						} else { //if length not > 1 add to array of translated taxonomies
+							newColumn[i] = taxonomyMap[c][0] || " ";
+							taxonomyLevelOfTerm[i] = "Level " + taxonomyLevel;
+						}
+					} else { //if it's undefined add empty cell
+						dataToCheckInHigherTaxonomy[i] = c;
+					}
+				}
+			}); // end for Each
+			
+			this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
+			this.setState({ newColumn: newColumn });
+
+			let remainingData = [dataInNeedOfProcessing, dataToCheckInHigherTaxonomy];
+			return remainingData;
+		}
 
 
     //---------------- FUNCTIONS USED TO CREATE FINAL TABLE ------------------------
@@ -207,6 +239,7 @@ class MapProcessPage extends Component {
 	// to be used to create the final Table using the function createTable below
 
 	combineArrays(data, array2, array3){
+
 		let combinedArray = [];	
 		data.forEach(function(c, i){
 			if(i===0){
