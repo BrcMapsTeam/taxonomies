@@ -5,7 +5,7 @@ import urllib, json
 listOfTaxonomies = "https://docs.google.com/spreadsheets/d/1_EKu8sGBryuZY9smHMemrRuZ6EvvqoTxsW_tbkS9f74/edit#gid=0";
 
 def createHXLLink(url):
-    return "https://proxy.hxlstandard.org/data.json?strip-headers=on&url=" + urllib.quote(url)
+    return "https://proxy.hxlstandard.org/data.json?strip-headers=on&url=" + urllib.quote(url) + "&force=on"
 
 
 response = urllib.urlopen(createHXLLink(listOfTaxonomies))
@@ -43,6 +43,7 @@ for taxonomy in taxonomies:
         for row in data:
             subTerm = row[1]
             baseTerm = row[2]
+            print(subTerm)
 
             if i>0:
                 if subTerm not in output:
