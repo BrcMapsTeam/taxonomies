@@ -145,21 +145,13 @@ class MapProcessPage extends Component {
             const currentRow = {"data": this.props.data, "rowStart": item[2], "rowEnd": item[2]+1 };
 
             return (
-                <div className="flex-row">
-                        <div className="flex-row" key={i}><span>How would you map the following item:&nbsp;</span><b>{item[0]}</b></div>
-                        <div className="flex-row">{listOfChoices}</div>
-                        <div className="flex-row">
-                            This is a snapshot of the corresponding row:
-                        </div>
-                        <div className="flex-row">
-                            <table className="scrollable-table" >
-                                <tbody>
-                                    < TableRows parameters={dataHeaders} />
-                                    < TableRows parameters={currentRow} />
-                                </tbody>
-                            </table>
-                        </div>
-                </div>);
+				< AskUserInput word = {item[0]} 
+							  wordKey = {i} 
+							  dataHeaders = {dataHeaders} 
+							  listOfChoices = {listOfChoices} 
+							  currentRow = {currentRow} 
+				/>
+			);	
         }, this);
 		
 		this.setState({ dataInNeedOfProcessing: wordFrom });
@@ -406,6 +398,78 @@ let tax = {
 };
 
 
+
+
+class AskUserInput extends Component {
+
+   constructor(props){
+        super(props); //defines this.props
+        this.state = {
+			word: '',
+			wordKey: '',
+			dataHeaders: {},
+			currentRow: {},
+			listOfChoices: ''
+        };
+    }
+
+    componentWillMount(){
+	//add class fade in
+		this.setState({word: this.props.word});
+		this.setState({wordKey: this.props.wordKey});
+		this.setState({dataHeaders: this.props.dataHeaders});
+		this.setState({currentRow: this.props.currentRow});
+		this.setState({listOfChoices: this.props.listOfChoices});
+    }
+
+	componentWillUnmount(){
+	//remove class fade in
+    }
+
+	componentWillReceiveProps(nextProps) {
+	//remove fade in
+	//add class fade in
+		this.setState({word: this.props.word});
+		this.setState({wordKey: this.props.wordKey});
+		this.setState({dataHeaders: this.props.dataHeaders});
+		this.setState({currentRow: this.props.currentRow});
+		this.setState({listOfChoices: this.props.listOfChoices});
+	}
+
+
+    render (){
+		return(
+			<div className="flex-row">
+					<DisplayWordThatNeedsInput word = {this.state.word} wordKey = {this.state.wordKey} />
+					<div className="flex-row">{this.state.listOfChoices}</div>
+					<div className="flex-row">
+						This is a snapshot of the corresponding row:
+					</div>
+					<div className="flex-row">
+						<table className="scrollable-table fade-in" >
+							<tbody>
+								< TableRows parameters={this.state.dataHeaders} />
+								< TableRows parameters={this.state.currentRow} />
+							</tbody>
+						</table>
+					</div>
+			</div>
+		);
+	}
+}
+
+
+class DisplayWordThatNeedsInput extends Component {
+
+	render(){
+		return(
+			<div className="flex-row" key={this.props.wordKey}>
+				<span>How would you map the following item:&nbsp;</span>
+				<b>{this.props.word}</b>
+			</div>
+		);
+	}
+}
 
 
 
