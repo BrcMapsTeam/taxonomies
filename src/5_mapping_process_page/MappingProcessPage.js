@@ -120,10 +120,10 @@ class MapProcessPage extends Component {
             // ---------- DEFAULT ------------------
 
             default: return (
-                    <div className="flex-row">
-                        {this.state.finishedProcessing}
-                    </div>
-                );
+                <div className="flex-row">
+                    {this.state.finishedProcessing}
+                </div>
+            );
         }
     }
 
@@ -190,38 +190,38 @@ class MapProcessPage extends Component {
 
 
 	searchTermInTaxonomy(taxonomyLevel, data, dataInNeedOfProcessing){
-			let taxonomyLevelOfTerm = this.state.taxonomyLevelOfTerm;
-		    let newColumn = this.state.newColumn;
-			let dataToCheckInHigherTaxonomy = {};
-			let mapTo = this.props.mapTo.slice(0, -1) + taxonomyLevel;
+		let taxonomyLevelOfTerm = this.state.taxonomyLevelOfTerm;
+		let newColumn = this.state.newColumn;
+		let dataToCheckInHigherTaxonomy = {};
+		let mapTo = this.props.mapTo.slice(0, -1) + taxonomyLevel;
 
-		    //Creating taxonomy map
-			tax.config(config_json);
-		    let taxonomyMap = new tax.createMap(this.props.mapFrom, mapTo);
+		//Creating taxonomy map
+		tax.config(config_json);
+		let taxonomyMap = new tax.createMap(this.props.mapFrom, mapTo);
 
-			//For each item to be translated
-			Object.keys(data).forEach(function(i){
-				if (i>1) {
-					let c = data[i];
-					if (taxonomyMap[c] !== undefined && taxonomyMap[c].length !==0){
-						if (taxonomyMap[c].length > 1){
-							dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
-						} else { //if length not > 1 add to array of translated taxonomies
-							newColumn[i] = taxonomyMap[c][0] || " ";
-							taxonomyLevelOfTerm[i] = "Level " + taxonomyLevel;
-						}
-					} else { //if it's undefined add empty cell
-						dataToCheckInHigherTaxonomy[i] = c;
+		//For each item to be translated
+		Object.keys(data).forEach(function(i){
+			if (i>1) {
+				let c = data[i];
+				if (taxonomyMap[c] !== undefined && taxonomyMap[c].length !==0){
+					if (taxonomyMap[c].length > 1){
+						dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
+					} else { //if length not > 1 add to array of translated taxonomies
+						newColumn[i] = taxonomyMap[c][0] || " ";
+						taxonomyLevelOfTerm[i] = "Level " + taxonomyLevel;
 					}
+				} else { //if it's undefined add empty cell
+					dataToCheckInHigherTaxonomy[i] = c;
 				}
-			}); // end for Each
+			}
+		}); // end for Each
 			
-			this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
-			this.setState({ newColumn: newColumn });
+		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
+		this.setState({ newColumn: newColumn });
 
-			let remainingData = [dataInNeedOfProcessing, dataToCheckInHigherTaxonomy];
-			return remainingData;
-		}
+		let remainingData = [dataInNeedOfProcessing, dataToCheckInHigherTaxonomy];
+		return remainingData;
+	}
 
 
     //---------------- FUNCTIONS USED TO CREATE FINAL TABLE ------------------------
@@ -255,13 +255,13 @@ class MapProcessPage extends Component {
     createTable(array){
         let finalTable = 
 			array.map( function(item, j){
-				return (<tr key={j}>
-								{item.map(
-									function(cell, i){ 
-										return <td key={i}>{cell}</td>
-									}
-								)}
-						</tr>);
+				return (
+					<tr key={j}>
+						{item.map(function(cell, i){ 
+								return <td key={i}>{cell}</td>
+						})}
+					</tr>
+				);
 			});
         return finalTable;
      }
@@ -276,11 +276,13 @@ class MapProcessPage extends Component {
                         {this.showProcessingState()}
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>
-                         <div className="NavButtonGreyed">Next</div>
+                         <div className="NavButtonGreyed">End</div>
                     </div>
                 </div>);
     }
 }
+
+
 
 //---------------------------------------------------------------------------------------
 
@@ -440,19 +442,19 @@ class AskUserInput extends Component {
     render (){
 		return(
 			<div className="flex-row">
-					<DisplayWordThatNeedsInput word = {this.state.word} wordKey = {this.state.wordKey} />
-					<div className="flex-row">{this.state.listOfChoices}</div>
-					<div className="flex-row">
-						This is a snapshot of the corresponding row:
-					</div>
-					<div className="flex-row">
-						<table className="scrollable-table fade-in" >
-							<tbody>
-								< TableRows parameters={this.state.dataHeaders} />
-								< TableRows parameters={this.state.currentRow} />
-							</tbody>
-						</table>
-					</div>
+				<DisplayWordThatNeedsInput word = {this.state.word} wordKey = {this.state.wordKey} />
+				<div className="flex-row">{this.state.listOfChoices}</div>
+				<div className="flex-row">
+					This is a snapshot of the corresponding row:
+				</div>
+				<div className="flex-row">
+					<table className="scrollable-table fade-in" >
+						<tbody>
+							< TableRows parameters={this.state.dataHeaders} />
+							< TableRows parameters={this.state.currentRow} />
+						</tbody>
+					</table>
+				</div>
 			</div>
 		);
 	}
