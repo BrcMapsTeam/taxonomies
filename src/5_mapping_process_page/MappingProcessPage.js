@@ -78,6 +78,7 @@ class MapProcessPage extends Component {
             this.setState({finishedProcessing: 'yes'});
         } else {
             this.setState({step: this.state.step + 1});
+				console.log(this.state.step);
         }
 
     }
@@ -95,7 +96,7 @@ class MapProcessPage extends Component {
                 return (
                     <div className="flex-row">
                     Step &nbsp;<b>{this.state.step}</b>
-                    {this.state.dataInNeedOfProcessing[this.state.step]}
+                    {this.state.dataInNeedOfProcessing}
                     </div>
                     );
 
@@ -143,13 +144,14 @@ class MapProcessPage extends Component {
             //Defining How the table will look like
             const dataHeaders = {"data": this.props.data, "rowStart": 0, "rowEnd": 1 };
             const currentRow = {"data": this.props.data, "rowStart": item[2], "rowEnd": item[2]+1 };
-
             return (
 				< AskUserInput word = {item[0]} 
-							  wordKey = {i} 
 							  dataHeaders = {dataHeaders} 
 							  listOfChoices = {listOfChoices} 
 							  currentRow = {currentRow} 
+							  step = {this.state.step}
+							  wordKey = {i}
+							  key = {i}
 				/>
 			);	
         }, this);
@@ -411,7 +413,8 @@ class AskUserInput extends Component {
 			wordKey: '',
 			dataHeaders: {},
 			currentRow: {},
-			listOfChoices: ''
+			listOfChoices: '',
+			active: false
         };
     }
 
@@ -422,33 +425,38 @@ class AskUserInput extends Component {
 		this.setState({dataHeaders: this.props.dataHeaders});
 		this.setState({currentRow: this.props.currentRow});
 		this.setState({listOfChoices: this.props.listOfChoices});
+				this.setState({active: this.props.step === this.props.wordKey});
+		console.log("mount");
     }
 
 	componentWillUnmount(){
+			this.setState({classes: 'scrollable-table fade-out'});
 	//remove class fade in
+	console.log("test");
     }
 
 	componentWillReceiveProps(nextProps) {
-	//remove fade in
 	//add class fade in
 		this.setState({word: this.props.word});
 		this.setState({wordKey: this.props.wordKey});
 		this.setState({dataHeaders: this.props.dataHeaders});
 		this.setState({currentRow: this.props.currentRow});
 		this.setState({listOfChoices: this.props.listOfChoices});
+		this.setState({active: this.props.step === this.props.wordKey});
+		console.log("new prop");
 	}
 
 
     render (){
 		return(
-			<div className="flex-row">
+			<div className="flex-row" style={{display: this.state.active ? 'inline' : 'none', transition: 'all 400ms'}}>
 				<DisplayWordThatNeedsInput word = {this.state.word} wordKey = {this.state.wordKey} />
 				<div className="flex-row">{this.state.listOfChoices}</div>
 				<div className="flex-row">
 					This is a snapshot of the corresponding row:
 				</div>
 				<div className="flex-row">
-					<table className="scrollable-table fade-in" >
+					<table className="scrollable-table" >
 						<tbody>
 							< TableRows parameters={this.state.dataHeaders} />
 							< TableRows parameters={this.state.currentRow} />
