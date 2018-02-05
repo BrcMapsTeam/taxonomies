@@ -1,4 +1,4 @@
-﻿/*-----------colours----------*/
+/*-----------colours----------*/
 /*-----------mix-ins----------*/
 .button {
   border-radius: 4px;
@@ -21,6 +21,36 @@
 .button-small:hover {
   background-color: #0c9dbc;
   color: white;
+}
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.2s;
+}
+.fade-out {
+  opacity: 0;
+  animation-name: fadeOutOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.2s;
+}
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .clickable-cell {
   border-bottom: #b1a9a2 1px solid;
