@@ -95,8 +95,12 @@ class MapProcessPage extends Component {
             case 'no':
                 return (
                     <div className="flex-row">
-                    Step &nbsp;<b>{this.state.step}</b>
-                    {this.state.dataInNeedOfProcessing}
+						Step &nbsp;<b>{this.state.step}</b>
+						<AskUserInput dataInNeedOfProcessing={this.state.dataInNeedOfProcessing} 
+									  data={this.props.data} 
+									  step={this.state.step} 
+									  nextWordHandler={this.nextWordHandler} 
+						/>
                     </div>
                     );
 
@@ -111,7 +115,9 @@ class MapProcessPage extends Component {
                         <div className="flex-row">
                             <table className="scrollable-table">
                                 <tbody>
-                                    {this.createTable(this.combineArrays(this.props.data, this.state.newColumn, this.state.taxonomyLevelOfTerm))}
+                                    {this.createTable(this.combineArrays(
+										this.props.data, this.state.newColumn, this.state.taxonomyLevelOfTerm)
+									)}
                                 </tbody>
                             </table>
                         </div>
@@ -132,32 +138,6 @@ class MapProcessPage extends Component {
     //---------------- GENERATING NEW DATA AND QUESTIONS TO USER ------------------------
     //----------------------------------------------------------------------------------
 
-	askUserInput(dataInNeedOfProcessing){
-	    let wordFrom;
-
-        wordFrom = dataInNeedOfProcessing.map(function(item, i){
-            const listOfChoices = item[1].map(function(word, j){ 
-                const id = word + item[2];
-                return <div className="button-small" onClick={this.nextWordHandler} key={j} id={id}>{word}</div>
-            }, this);
-
-            //Defining How the table will look like
-            const dataHeaders = {"data": this.props.data, "rowStart": 0, "rowEnd": 1 };
-            const currentRow = {"data": this.props.data, "rowStart": item[2], "rowEnd": item[2]+1 };
-            return (
-				< AskUserInput word = {item[0]} 
-							  dataHeaders = {dataHeaders} 
-							  listOfChoices = {listOfChoices} 
-							  currentRow = {currentRow} 
-							  step = {this.state.step}
-							  wordKey = {i}
-							  key = {i}
-				/>
-			);	
-        }, this);
-		
-		this.setState({ dataInNeedOfProcessing: wordFrom });
-	}
 
 	
     processData(data){
@@ -185,7 +165,7 @@ class MapProcessPage extends Component {
 		if (dataInNeedOfProcessing.length === 0){
             this.setState({ finishedProcessing: 'yes'});
         } else {
-			this.askUserInput(dataInNeedOfProcessing);
+			this.setState({dataInNeedOfProcessing: dataInNeedOfProcessing});
 		};
 		
     }//End Process data
@@ -409,61 +389,59 @@ class AskUserInput extends Component {
    constructor(props){
         super(props); //defines this.props
         this.state = {
-			word: '',
-			wordKey: '',
-			dataHeaders: {},
-			currentRow: {},
-			listOfChoices: '',
-			active: false
+			allDOMElements: []
         };
     }
 
-    componentWillMount(){
-	//add class fade in
-		this.setState({word: this.props.word});
-		this.setState({wordKey: this.props.wordKey});
-		this.setState({dataHeaders: this.props.dataHeaders});
-		this.setState({currentRow: this.props.currentRow});
-		this.setState({listOfChoices: this.props.listOfChoices});
-				this.setState({active: this.props.step === this.props.wordKey});
-		console.log("mount");
-    }
-
-	componentWillUnmount(){
-			this.setState({classes: 'scrollable-table fade-out'});
-	//remove class fade in
-	console.log("test");
+	componentWillMount(){
+		this.createList(this.props.dataInNeedOfProcessing, this.props.data); 
     }
 
 	componentWillReceiveProps(nextProps) {
-	//add class fade in
-		this.setState({word: this.props.word});
-		this.setState({wordKey: this.props.wordKey});
-		this.setState({dataHeaders: this.props.dataHeaders});
-		this.setState({currentRow: this.props.currentRow});
-		this.setState({listOfChoices: this.props.listOfChoices});
-		this.setState({active: this.props.step === this.props.wordKey});
-		console.log("new prop");
+		this.createList(this.props.dataInNeedOfProcessing, this.props.data); 
 	}
 
+	createList(dataInNeedOfProcessing, data) {
+		let wordList = [];
+        let allDOMElements = dataInNeedOfProcessing.map(function(item, i){
+            wordList[i] = {};
+			wordList[i].listOfChoices = item[1].map(function(word, j){ 
+                const id = word + item[2];
+                return(
+					<div className="button-small" onClick={this.props.nextWordHandler} key={j} id={id}>{word}</div>
+					);
+            }, this);
 
-    render (){
-		return(
-			<div className="flex-row" style={{display: this.state.active ? 'inline' : 'none', transition: 'all 400ms'}}>
-				<DisplayWordThatNeedsInput word = {this.state.word} wordKey = {this.state.wordKey} />
-				<div className="flex-row">{this.state.listOfChoices}</div>
-				<div className="flex-row">
-					This is a snapshot of the corresponding row:
-				</div>
-				<div className="flex-row">
-					<table className="scrollable-table" >
+            //Defining How the table will look like
+            wordList[i].dataHeaders = {"data": data, "rowStart": 0, "rowEnd": 1 };
+            wordList[i].currentRow = {"data": data, "rowStart": item[2], "rowEnd": item[2]+1 };
+			return(
+				<div className="flex-row" key={i} style={{display: this.props.step === i ? 'inline' : 'none', transition: 'all 400ms'}}>
+					<DisplayWordThatNeedsInput word = {item[0]} />
+					<div className="flex-row">{wordList[i].listOfChoices}</div>
+					<div className="flex-row">
+						This is a snapshot of the corresponding row:
+					</div>
+					<div className="flex-row">
+						<table className="scrollable-table" >
 						<tbody>
-							< TableRows parameters={this.state.dataHeaders} />
-							< TableRows parameters={this.state.currentRow} />
+							< TableRows parameters={wordList[i].dataHeaders} />
+							< TableRows parameters={wordList[i].currentRow} />
 						</tbody>
 					</table>
 				</div>
 			</div>
+			)
+        }, this);
+		this.setState({allDOMElements: allDOMElements});
+
+	}
+
+    render (){
+		return(
+		<div>
+			{this.state.allDOMElements}
+		</div>
 		);
 	}
 }
@@ -473,7 +451,7 @@ class DisplayWordThatNeedsInput extends Component {
 
 	render(){
 		return(
-			<div className="flex-row" key={this.props.wordKey}>
+			<div className="flex-row">
 				<span>How would you map the following item:&nbsp;</span>
 				<b>{this.props.word}</b>
 			</div>
