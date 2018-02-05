@@ -5,6 +5,7 @@
   "homepage": "http://brcmapsteam.github.io/taxonomies/",
   "dependencies": {
     "gh-pages": "^1.0.0",
+    "less": "^2.7.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.11"
