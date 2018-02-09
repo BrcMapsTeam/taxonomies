@@ -58,7 +58,7 @@ class MapProcessPage extends Component {
 		let word;
 		let taxonomyLevelOfTerm = this.state.taxonomyLevelOfTerm.slice();
 		let tempArray = this.state.newColumn.slice();
-		const taxonomyLevel = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
+		const taxonomyLevelTo = "Level " + this.props.mapTo.substr(this.props.mapTo.length-1);
 
 		wordArray.forEach(function(item,i){
 			if (i===0){
@@ -69,7 +69,7 @@ class MapProcessPage extends Component {
 		})
 
         tempArray[index] = word;
-		taxonomyLevelOfTerm[index] = taxonomyLevel;
+		taxonomyLevelOfTerm[index] = taxonomyLevelTo;
 
         this.setState({newColumn: tempArray});
 		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
@@ -143,22 +143,29 @@ class MapProcessPage extends Component {
     processData(data){
         const column = data;
         let dataInNeedOfProcessing = [];
-		let taxonomyLevel = this.props.mapTo.substr(this.props.mapTo.length-1);
+		let taxonomyLevelTo = this.props.mapTo.substr(this.props.mapTo.length-1);
+		let taxonomyLevelFrom = 1;
 		let dataToCheckInHigherTaxonomy = [];
-		
-		let results = this.searchTermInTaxonomy(taxonomyLevel, column, dataInNeedOfProcessing);
+				console.log(taxonomyLevelTo);
+		let results = this.searchTermInTaxonomy(taxonomyLevelFrom, 
+												taxonomyLevelTo, 
+												column, 
+												dataInNeedOfProcessing);
 		dataInNeedOfProcessing = results[0];
 		dataToCheckInHigherTaxonomy = results[1];
-		taxonomyLevel--;
+	//	taxonomyLevelTo--;
 
-		while(taxonomyLevel > 0){
+		while(taxonomyLevelTo > 0){
 			if(dataToCheckInHigherTaxonomy.length!==0){
-				results = this.searchTermInTaxonomy(taxonomyLevel, dataToCheckInHigherTaxonomy, dataInNeedOfProcessing);
+				results = this.searchTermInTaxonomy(taxonomyLevelFrom,
+													taxonomyLevelTo,
+													dataToCheckInHigherTaxonomy, 
+													dataInNeedOfProcessing);
 				dataInNeedOfProcessing = results[0];
 				dataToCheckInHigherTaxonomy = results[1];
 			}
 
-				taxonomyLevel--;
+				taxonomyLevelTo--;
 		}
 
 		//While the dataInNeedOfProcessing is not empty, keep processing
@@ -171,12 +178,12 @@ class MapProcessPage extends Component {
     }//End Process data
 
 
-	searchTermInTaxonomy(taxonomyLevel, data, dataInNeedOfProcessing){
+	searchTermInTaxonomy(taxonomyLevelFrom, taxonomyLevelTo, data, dataInNeedOfProcessing){
 		let taxonomyLevelOfTerm = this.state.taxonomyLevelOfTerm;
 		let newColumn = this.state.newColumn;
 		let dataToCheckInHigherTaxonomy = {};
-		let mapTo = this.props.mapTo.slice(0, -1) + taxonomyLevel;
-
+		let mapTo = this.props.mapTo.slice(0, -1) + taxonomyLevelTo;
+		
 		//Creating taxonomy map
 		tax.config(config_json);
 		let taxonomyMap = new tax.createMap(this.props.mapFrom, mapTo);
@@ -190,14 +197,14 @@ class MapProcessPage extends Component {
 						dataInNeedOfProcessing.push([c, taxonomyMap[c], i]);
 					} else { //if length not > 1 add to array of translated taxonomies
 						newColumn[i] = taxonomyMap[c][0] || " ";
-						taxonomyLevelOfTerm[i] = "Level " + taxonomyLevel;
+						taxonomyLevelOfTerm[i] = "Level " + taxonomyLevelTo;
 					}
 				} else { //if it's undefined add empty cell
 					dataToCheckInHigherTaxonomy[i] = c;
 				}
 			}
 		}); // end for Each
-			
+
 		this.setState({ taxonomyLevelOfTerm: taxonomyLevelOfTerm });
 		this.setState({ newColumn: newColumn });
 
@@ -224,7 +231,7 @@ class MapProcessPage extends Component {
 				array2[i] = "#crisis+type";
 				array3[i] = "#level";
 			}
-			combinedArray.push(c.concat(array2[i], array3[i]));
+			combinedArray.push(c.concat(array2[i], array3[i])); 
 		});
 		return combinedArray;
 	}
