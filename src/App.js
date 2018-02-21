@@ -17,7 +17,7 @@ class App extends Component {
         super(props);
         this.state = {
             step: 1,
-            value: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1x30JatnFHEqEQx2Nm9NQhlHlYL2Kml-84v9plgO1RcY/edit%23gid%3D1339100966&force=on",
+            value: "https://proxy.hxlstandard.org/data.json?force=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1YxeSuB2FLOMjNkj4iH_4fwELqSar2FbBPgjd4u0hqQA%2Fedit%23gid%3D0&force=on",
             data: <tr><td className="waiting">Loading<span className="loading-animation">...</span></td></tr>,
             crisisTag: "#crisis+name",
             crisisColumnJson: "",
