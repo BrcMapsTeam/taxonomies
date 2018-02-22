@@ -16,14 +16,15 @@ class SelectColumnPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            buttonReady: 'no'
+            buttonReady: 'no',
+			defaultText: ' - Please select a column above'
         };
     }
 
     //When new data is loaded un-grey the button
     componentWillReceiveProps(nextProps){
 	//nextProps.data !== this.props.data && 
-        if (nextProps.data !== null && nextProps.crisisTag !== this.props.crisisTag) {
+        if (nextProps.data !== null && nextProps.crisisTag !== this.state.defaultText) {
             this.setState({buttonReady: 'yes'});
         } if (nextProps.data === null) {
             this.setState({buttonReady: 'no'});
@@ -34,7 +35,7 @@ class SelectColumnPage extends Component {
     componentDidMount(){
         const data = this.props.data;
 
-        if (data !== null && data.type !== "tr" && Object.keys(data).length !== 0) {
+        if (data !== null && data.type !== "tr" && Object.keys(data).length !== 0 && this.props.crisisTag !== this.state.defaultText) {
             this.setState({buttonReady: 'yes'});
         }
     }
