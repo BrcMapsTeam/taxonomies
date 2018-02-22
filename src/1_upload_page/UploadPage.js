@@ -31,9 +31,9 @@ class UploadPage extends Component {
 
     render(){
         return (<div className="flex-page">
-                    <h2 className="flex-row">Disaster Taxonomies</h2>
+                    <h2 className="flex-row title">Disaster Taxonomies</h2>
 					<div className="flex-row">
-                        <div>This page will help you convert the disaster terms in your dataset from one taxonomy to another:</div>
+                        <div>This page will help you convert the disaster terms<br />in your dataset from one taxonomy to another:</div>
                     </div>
 					<Instructions active = {this.state.active} handleClick={this.showText} />
 					<div className="flex-row">

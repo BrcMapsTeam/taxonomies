@@ -67,7 +67,7 @@ tableLoading(){
     render(){
 
         return (<div className="flex-page">
-                    <h2 className="flex-row">Disaster Taxonomies</h2>
+                    <h2 className="flex-row title">Disaster Taxonomies</h2>
                     <div className="flex-row">
                         <div>Please select the <b>#crisis</b> column you wish to map:</div>
                     </div> 

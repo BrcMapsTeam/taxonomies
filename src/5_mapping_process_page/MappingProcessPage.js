@@ -263,7 +263,7 @@ class MapProcessPage extends Component {
 
     render(){
         return (<div className="flex-page">
-                    <h2 className="flex-row">Disaster Taxonomies</h2>
+                    <h2 className="flex-row title">Disaster Taxonomies</h2>
                         {this.showProcessingState()}
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>

@@ -22,7 +22,7 @@ class SelectTaxonomyToPage extends Component {
 
         return (
                 <div className="flex-page">
-                    <h2 className="flex-row">Disaster Taxonomies</h2>
+                    <h2 className="flex-row title">Disaster Taxonomies</h2>
                     <div className="flex-row">
                         <div>Which taxonomy are you mapping <b>TO</b>?</div>
                     </div>
