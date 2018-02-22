@@ -1,5 +1,9 @@
-﻿/*-----------colours----------*/
+/*-----------colours----------*/
 /*-----------mix-ins----------*/
+.smoothTransition {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
 .button {
   border-radius: 4px;
   box-shadow: 0px 3px 5px 0px #b0b8bd;
@@ -83,9 +87,20 @@ a {
   overflow-y: auto;
   overflow-x: hidden;
 }
-.small {
-  font-size: 12px;
-  color: #bdb6b0;
+#instructions {
+  font-size: 13px;
+  text-align: left;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+.show {
+  display: block;
+}
+.hidden {
+  display: none;
 }
 /*-------------------- NAVIGATION BUTTONS ---------*/
 .NavButton {

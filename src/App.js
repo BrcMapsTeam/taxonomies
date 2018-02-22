@@ -17,9 +17,9 @@ class App extends Component {
         super(props);
         this.state = {
             step: 1,
-            value: "https://proxy.hxlstandard.org/data.json?force=on&url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1YxeSuB2FLOMjNkj4iH_4fwELqSar2FbBPgjd4u0hqQA%2Fedit%23gid%3D0&force=on",
+            value: "https://docs.google.com/spreadsheets/d/1JpnKSjzqXKcCLOuLigSzzlwc22x3cXlczpbS5evdbOQ/edit#gid=1339100966",
             data: <tr><td className="waiting">Loading<span className="loading-animation">...</span></td></tr>,
-            crisisTag: "#crisis+name",
+            crisisTag: "#crisis+type",
             crisisColumnJson: "",
             mapFrom: "disaster_GLIDE1",
             mapTo: "disaster_IFRC4"
@@ -61,10 +61,14 @@ class App extends Component {
         });
     }
 
+	createHXLLink(url){
+		return "https://proxy.hxlstandard.org/data.json?&url=" + encodeURIComponent(url) + "&force=on";
+	}
+
     //ajax request to get json data
     getUserLink(event) {
 
-        var userLink = this.state.value;
+        var userLink = this.createHXLLink(this.state.value);
 
         let getJSON = function(url) {
             return new Promise(function(resolve, reject) {
@@ -86,7 +90,7 @@ class App extends Component {
         getJSON(userLink).then(function(userData) {
             this.setState({data:userData});
         }.bind(this), function(status) { //error detection....
-            alert('Something went wrong.');
+            alert('Something went wrong. Please make sure your spreadsheet is public to everyone on the internet.');
             this.setState({data:null});
         }.bind(this)
     );

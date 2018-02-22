@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class UploadPage extends Component {
+	    constructor(props){
+        super(props);
+		this.state = {
+			active: false
+		}
+		this.showText = this.showText.bind(this);
+	}
 
     //Makes text field come into focus on page load
     componentDidMount(){
@@ -14,17 +21,23 @@ class UploadPage extends Component {
 
     }
 
-    render(){
 
+	showText(){
+		this.setState((prevState) => {
+			let newState = !prevState.active;
+			return {active: newState};
+		});
+	}
+
+    render(){
         return (<div className="flex-page">
                     <h2 className="flex-row">Disaster Taxonomies</h2>
-                    <div className="flex-row">
-                        <div>Link to JSON dataset you wish to map (example: <a href="http://goo.gl/VvNwF9">Link</a>):</div>
+					<div className="flex-row">
+                        <div>This page will help you convert the disaster terms in your dataset from one taxonomy to another:</div>
                     </div>
-                    <div className="flex-row">
-                       <div className="small">If you have a googleSheet please use the HXL Proxy 
-                            (<a href="https://proxy.hxlstandard.org/data/source">Link</a>) to generate an online JSON version of the file.
-                       </div>
+					<Instructions active = {this.state.active} handleClick={this.showText} />
+					<div className="flex-row">
+                        <div>Link to googleSheet you wish to map:</div>
                     </div>
                     <div className="flex-row">
                         <FormInput handleLinkChange={this.props.handleLinkChange} link={this.props.link}/>
@@ -47,5 +60,34 @@ class FormInput extends Component {
     }
 }
 
+class Instructions extends Component {
+	constructor(props){
+		super(props);
+		this.state ={
+			active: false
+		};
+	}
 
+	componentWillReceiveProps(nextProps){
+		this.setState({active: nextProps.active});
+	}
+	
+	render(){
+		return (
+		<div className="flex-row" onClick={this.props.handleClick}>
+			<div className="flex-row">Show instructions</div>
+                <div id="instructions" className={this.state.active ? "show" : "hidden" }>
+					- Paste your data into a googleSheet,
+					<br />
+					- <a href="http://hxlstandard.org/">HXL tags</a> in the second row (app won't work otherwise),
+					<br />
+					- make your disaster column terms is labelled with the HXL tag "#crisis+type",
+					<br />
+					- and make sure your googleSheet is public (top right "share" button: "anyone with link can edit").
+                </div>
+        </div>
+			);
+	}
+
+}
 export default UploadPage;

@@ -15,13 +15,17 @@
 
 /*-----------mix-ins----------*/
 
+.smoothTransition{
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
 .button{
     border-radius: 4px;
     box-shadow: 0px 3px 5px 0px @grey-shadows;
     cursor: pointer;
     max-width: 30%;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
+	.smoothTransition
 }
 
 .button-small{
@@ -97,9 +101,21 @@ a{
     overflow-x: hidden;
 }
 
-.small{
-    font-size: 12px;
-    color: @grey-medium;
+#instructions{
+    font-size: 13px;
+	text-align: left;
+	padding: 10px;
+	background-color: @grey-light;
+	border-radius: 3px;
+	.smoothTransition
+}
+
+.show{
+	display: block;
+}
+
+.hidden{
+	display: none;
 }
 
 /*-------------------- NAVIGATION BUTTONS ---------*/
