@@ -22,8 +22,8 @@ class SelectColumnPage extends Component {
 
     //When new data is loaded un-grey the button
     componentWillReceiveProps(nextProps){
-
-        if (nextProps.data !== this.props.data && nextProps.data !== null) {
+	//nextProps.data !== this.props.data && 
+        if (nextProps.data !== null && nextProps.crisisTag !== this.props.crisisTag) {
             this.setState({buttonReady: 'yes'});
         } if (nextProps.data === null) {
             this.setState({buttonReady: 'no'});

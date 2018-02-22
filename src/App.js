@@ -19,10 +19,10 @@ class App extends Component {
             step: 1,
             value: "https://docs.google.com/spreadsheets/d/1YxeSuB2FLOMjNkj4iH_4fwELqSar2FbBPgjd4u0hqQA/edit#gid=0",
             data: <tr><td className="waiting">Loading<span className="loading-animation">...</span></td></tr>,
-            crisisTag: "#crisis+type",
+            crisisTag: " - Please select a column above",
             crisisColumnJson: "",
-            mapFrom: "disaster_GLIDE1",
-            mapTo: "disaster_IFRC4"
+            mapFrom: "disaster_IFRC1",
+            mapTo: "disaster_IFRC1"
         };
 
         //List of all functions in the App Class using "this"
