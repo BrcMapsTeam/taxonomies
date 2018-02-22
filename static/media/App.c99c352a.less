@@ -1,6 +1,6 @@
 /*-----------colours----------*/
-
-@red-primary: #ef1829;
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+@red-primary: #eb452f; /* BRC red: #ef1829;*/
 @red-dark: #98192a;
 @green-primary: #02b196;
 @green-secondary: #057a64;
@@ -10,7 +10,7 @@
 @grey-light: #f1f1f1;
 @black: #000000;
 @white: #ffffff;
-@blue-pantone: #0c9dbc;
+@blue-pantone: #097B95;
 
 
 /*-----------mix-ins----------*/
@@ -22,10 +22,10 @@
 
 .button{
     border-radius: 4px;
-    box-shadow: 0px 3px 5px 0px @grey-shadows;
     cursor: pointer;
     max-width: 30%;
-	.smoothTransition
+	.smoothTransition;
+	box-shadow: 0px 3px 5px 0px @grey-shadows;
 }
 
 .button-small{
@@ -37,6 +37,12 @@
         color: white;
     }
     .button
+}
+
+.button-large{
+    padding: 1.2em 2.2em 1.2em 2.2em;
+    margin: 1em 0.5em 1em 0.5em;
+	.button
 }
 
 .clickable-cell{
@@ -88,6 +94,8 @@ body{
   text-align: center;
   font-size: 15px;
   margin: auto; // Needed for mobile
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
 
 a{
@@ -102,7 +110,7 @@ a{
 }
 
 #instructions{
-    font-size: 13px;
+    font-size: 14px;
 	text-align: left;
 	padding: 10px;
 	background-color: @grey-light;
@@ -118,27 +126,32 @@ a{
 	display: none;
 }
 
+.title{
+	background-color: @red-primary;
+	margin: 0px;
+	color: @white;
+	box-shadow: 0px 2px 5px 0px @grey-shadows;
+	padding: 1.2em;
+}
+
 /*-------------------- NAVIGATION BUTTONS ---------*/
 
 .NavButton{
-    padding: 2em 2.5em 2em 2.5em;
-    margin: 2em 1em 5em 1em;
+	font-size: 20px;
     color: @white;
     background-color: @green-primary;
 
     &:hover{
             background-color: @green-secondary;
     }
-
-    .button
+	.button-large
 }
 
 .NavButtonGreyed{
-    padding: 2em 2.5em 2em 2.5em;
-    margin: 2em 1em 5em 1em;
+	font-size: 20px;
     color: @grey-light;
     background-color: @grey-medium;
-    .button
+	.button-large
 }
 
 
@@ -146,16 +159,16 @@ a{
 
 .TaxButton{
     padding: 2em 2.5em 2em 2.5em;
-    margin: 2em 1em 5em 1em;
-    color: @white;
+    margin: 1em 1em 1em 1em;
     border-bottom: darken(@grey-medium, 5%) 1px solid;
     .button
 }
 
 .colorOn{
-    background-color: #2997db;
+    background-color: @blue-pantone;
+	color: @white;
     &:hover{
-        background-color: darken(#2997db, 15%);
+        background-color: darken(@blue-pantone, 15%);
     }
     }
 
