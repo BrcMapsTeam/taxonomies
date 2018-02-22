@@ -1,5 +1,5 @@
 /*-----------colours----------*/
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 /* BRC red: #ef1829;*/
 /*-----------mix-ins----------*/
 .smoothTransition {
@@ -122,6 +122,7 @@ a {
   color: #ffffff;
   box-shadow: 0px 2px 5px 0px #b0b8bd;
   padding: 1.2em;
+  font-weight: 700;
 }
 /*-------------------- NAVIGATION BUTTONS ---------*/
 .NavButton {
@@ -205,7 +206,7 @@ input {
   height: 3em;
 }
 .scrollable-table tr:first-of-type + tr {
-  font-weight: 600;
+  font-weight: 500;
 }
 .scrollable-table td {
   min-width: 10em;
