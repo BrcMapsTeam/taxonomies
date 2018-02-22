@@ -17,7 +17,7 @@ class App extends Component {
         super(props);
         this.state = {
             step: 1,
-            value: "https://docs.google.com/spreadsheets/d/1JpnKSjzqXKcCLOuLigSzzlwc22x3cXlczpbS5evdbOQ/edit#gid=1339100966",
+            value: "https://docs.google.com/spreadsheets/d/1YxeSuB2FLOMjNkj4iH_4fwELqSar2FbBPgjd4u0hqQA/edit#gid=0",
             data: <tr><td className="waiting">Loading<span className="loading-animation">...</span></td></tr>,
             crisisTag: "#crisis+type",
             crisisColumnJson: "",

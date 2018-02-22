@@ -75,7 +75,7 @@ class Instructions extends Component {
 	render(){
 		return (
 		<div className="flex-row" onClick={this.props.handleClick}>
-			<div className="flex-row">Show instructions</div>
+			<a href="#" className="flex-row">Show instructions</a>
                 <div id="instructions" className={this.state.active ? "show" : "hidden" }>
 					- Paste your data into a googleSheet,
 					<br />
