@@ -30,7 +30,7 @@
 }
 .button-large {
   padding: 1.2em 2.2em 1.2em 2.2em;
-  margin: 1em 0.5em 1em 0.5em;
+  margin: 1em 0.5em 5em 0.5em;
   border-radius: 4px;
   cursor: pointer;
   max-width: 30%;
@@ -130,7 +130,7 @@ a {
   color: #ffffff;
   background-color: #02b196;
   padding: 1.2em 2.2em 1.2em 2.2em;
-  margin: 1em 0.5em 1em 0.5em;
+  margin: 1em 0.5em 5em 0.5em;
   border-radius: 4px;
   cursor: pointer;
   max-width: 30%;
@@ -146,7 +146,7 @@ a {
   color: #f1f1f1;
   background-color: #bdb6b0;
   padding: 1.2em 2.2em 1.2em 2.2em;
-  margin: 1em 0.5em 1em 0.5em;
+  margin: 1em 0.5em 5em 0.5em;
   border-radius: 4px;
   cursor: pointer;
   max-width: 30%;
