@@ -95,7 +95,9 @@ class MapProcessPage extends Component {
             case 'no':
                 return (
                     <div className="flex-row">
-						Step &nbsp;<b>{this.state.step}</b>
+						<div className="flex-row">
+							Step &nbsp;<b>{this.state.step}</b>
+						</div>
 						<AskUserInput dataInNeedOfProcessing={this.state.dataInNeedOfProcessing} 
 									  data={this.props.data} 
 									  step={this.state.step} 
