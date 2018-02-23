@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
+import Header from '../0_header/Header';
 import '../App.css';
 import config_json from '../taxonomy_maps/config.js';
 
@@ -21,7 +22,7 @@ class SelectTaxonomyFromPage extends Component {
 
         return (
                 <div className="flex-page">
-                    <h2 className="flex-row title">Disaster Taxonomies</h2>
+                    <Header />
                     <div className="flex-row">
                         <div>Which taxonomy are you mapping <b>FROM</b>?</div>
                     </div>

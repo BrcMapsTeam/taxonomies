@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
+import Header from '../0_header/Header';
 import '../App.css';
 import config_json from '../taxonomy_maps/config.js';
 import { TableRows } from '../2_select_column_page/SelectColumnPage';
@@ -263,7 +264,7 @@ class MapProcessPage extends Component {
 
     render(){
         return (<div className="flex-page">
-                    <h2 className="flex-row title">Disaster Taxonomies</h2>
+                    <Header />
                         {this.showProcessingState()}
                     <div className="flex-row">
                          <div className="NavButton" onClick={this.props.previousStep()}>Back</div>

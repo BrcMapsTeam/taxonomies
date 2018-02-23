@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
+import Header from '../0_header/Header';
 import '../App.css';
 
 class UploadPage extends Component {
@@ -31,7 +32,7 @@ class UploadPage extends Component {
 
     render(){
         return (<div className="flex-page">
-                    <h2 className="flex-row title">Disaster Taxonomies</h2>
+					<Header />
 					<div className="flex-row">
                         <div>This page will help you convert the disaster terms<br />in your dataset from one taxonomy to another:</div>
                     </div>

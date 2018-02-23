@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
+import Header from '../0_header/Header';
 import '../App.css';
 
 
@@ -67,7 +68,7 @@ tableLoading(){
     render(){
 
         return (<div className="flex-page">
-                    <h2 className="flex-row title">Disaster Taxonomies</h2>
+                    <Header />
                     <div className="flex-row">
                         <div>Please select the <b>#crisis</b> column you wish to map:</div>
                     </div> 
