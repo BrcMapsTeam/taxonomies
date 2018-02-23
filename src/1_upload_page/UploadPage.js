@@ -80,9 +80,9 @@ class Instructions extends Component {
                 <div id="instructions" className={this.state.active ? "show" : "hidden" }>
 					- Paste your data into a googleSheet,
 					<br />
-					- <a href="http://hxlstandard.org/">HXL tags</a> in the second row (app won't work otherwise),
+					- make sure there are <a href="http://hxlstandard.org/">HXL tags</a> in the second row (app won't work otherwise),
 					<br />
-					- make your disaster column terms is labelled with the HXL tag "#crisis+type",
+					- make sure your disaster column terms is labelled with the HXL tag "#crisis+type",
 					<br />
 					- and make sure your googleSheet is public (top right "share" button: "anyone with link can edit").
                 </div>
