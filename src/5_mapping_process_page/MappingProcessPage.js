@@ -149,7 +149,6 @@ class MapProcessPage extends Component {
 		let taxonomyLevelTo = this.props.mapTo.substr(this.props.mapTo.length-1);
 		let taxonomyLevelFrom = 1;
 		let dataToCheckInHigherTaxonomy = [];
-				console.log(taxonomyLevelTo);
 		let results = this.searchTermInTaxonomy(taxonomyLevelFrom, 
 												taxonomyLevelTo, 
 												column, 
@@ -404,14 +403,14 @@ class AskUserInput extends Component {
     }
 
 	componentWillMount(){
-		this.createList(this.props.dataInNeedOfProcessing, this.props.data); 
+		this.createList(this.props.dataInNeedOfProcessing, this.props.data, this.props.step); 
     }
 
 	componentWillReceiveProps(nextProps) {
-		this.createList(this.props.dataInNeedOfProcessing, this.props.data); 
+	this.createList(this.props.dataInNeedOfProcessing, this.props.data, nextProps.step);
 	}
 
-	createList(dataInNeedOfProcessing, data) {
+	createList(dataInNeedOfProcessing, data, step) {
 		let wordList = [];
         let allDOMElements = dataInNeedOfProcessing.map(function(item, i){
             wordList[i] = {};
@@ -426,7 +425,8 @@ class AskUserInput extends Component {
             wordList[i].dataHeaders = {"data": data, "rowStart": 0, "rowEnd": 1 };
             wordList[i].currentRow = {"data": data, "rowStart": item[2], "rowEnd": item[2]+1 };
 			return(
-				<div className="flex-row" key={i} style={{display: this.props.step === i ? 'inline' : 'none', transition: 'all 400ms'}}>
+				<div className="flex-row" key={i} style={{display: step === i ? 'inline' : 'none', transition: 'all 400ms'}}>
+				{this.state.step}
 					<DisplayWordThatNeedsInput word = {item[0]} />
 					<div className="flex-row">{wordList[i].listOfChoices}</div>
 					<div className="flex-row">
