@@ -1,5 +1,7 @@
 Source and info: https://github.com/facebookincubator/create-react-app
 
+This project uses Nodejs (https://nodejs.org/) (use `node -v`) to check version.
+
 [![Build Status](https://travis-ci.org/BrcMapsTeam/taxonomies.svg?branch=master)](https://travis-ci.org/BrcMapsTeam/taxonomies)
 
 ## npm install
