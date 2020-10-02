@@ -56,3 +56,4 @@ Deploys the current built version to gh-pages. This command automatically runs t
 ### npm udpate
 
 All the dependencies are safely updated to the wanted version. As well as updating the packages in the node_modules folder, the package.json and package-lock.json files will be updated (use "npm outdated" to find out list of packages).
+When updating npm or node, ensure travis.yml file has correct version of node
