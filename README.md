@@ -53,6 +53,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 Deploys the current built version to gh-pages. This command automatically runs the pre-deploy line in the package.json too.
 
-## npm udpate
+### npm udpate
 
 All the dependencies are safely updated to the wanted version. As well as updating the packages in the node_modules folder, the package.json and package-lock.json files will be updated (use "npm outdated" to find out list of packages).
